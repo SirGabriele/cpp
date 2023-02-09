@@ -6,14 +6,13 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 19:49:44 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/07 04:49:27 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/02/09 10:35:17 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
 # include <iostream>
-# include <iomanip>
 
 class	Contact
 {

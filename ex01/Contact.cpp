@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 20:51:01 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/07 04:06:56 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/02/09 09:22:17 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	Contact::setFirstName(void)
 		if (user_input.empty() == false)
 			break ;
 		if (std::cin.eof() == false)
-		std::cout << "\e[1;31mThis field must be filled\e[0m" << std::endl;
-	}while(std::cin.eof() == false);
+			std::cout << "\e[1;31mThis field must be filled\e[0m" << std::endl;
+	} while(std::cin.eof() == false);
 	if (std::cin.eof())
 		std::cout << "\e[1;31mYou press Ctrl-D, the adding process stops here\e[0m" << std::endl;
 	else
@@ -66,7 +66,7 @@ void	Contact::setLastName(void)
 			break ;
 		if (std::cin.eof() == false)
 			std::cout << "\e[1;31mThis field must be filled\e[0m" << std::endl;
-	}while(std::cin.eof() == false);
+	} while(std::cin.eof() == false);
 	if (std::cin.eof())
 		std::cout << "\e[1;31mYou press Ctrl-D, the adding process stops here\e[0m" << std::endl;
 	else
@@ -92,7 +92,7 @@ void	Contact::setNickname(void)
 			break ;
 		if (std::cin.eof() == false)
 			std::cout << "\e[1;31mThis field must be filled\e[0m" << std::endl;
-	}while(std::cin.eof() == false);
+	} while(std::cin.eof() == false);
 	if (std::cin.eof())
 		std::cout << "\e[1;31mYou press Ctrl-D, the adding process stops here\e[0m" << std::endl;
 	else
@@ -118,7 +118,7 @@ void	Contact::setPhoneNumber(void)
 			break ;
 		if (std::cin.eof() == false)
 			std::cout << "\e[1;31mThis field must be filled\e[0m" << std::endl;
-	}while(std::cin.eof() == false);
+	} while(std::cin.eof() == false);
 	if (std::cin.eof())
 		std::cout << "\e[1;31mYou press Ctrl-D, the adding process stops here\e[0m" << std::endl;
 	else
@@ -144,7 +144,7 @@ void	Contact::setDarkestSecret(void)
 			break ;
 		if (std::cin.eof() == false)
 			std::cout << "\e[1;31mThis field must be filled\e[0m" << std::endl;
-	}while(std::cin.eof() == false);
+	} while(std::cin.eof() == false);
 	if (std::cin.eof())
 		std::cout << "\e[1;31mYou press Ctrl-D, the adding process stops here\e[0m" << std::endl;
 	else

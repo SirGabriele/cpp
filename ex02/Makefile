@@ -6,19 +6,18 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/31 13:41:23 by kbrousse          #+#    #+#              #
-#    Updated: 2023/02/09 09:02:48 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/02/09 12:04:49 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = phonebook
+NAME = account
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =	PhoneBook.cpp	\
-		Contact.cpp		\
-		main.cpp
+SRCS =	Account.cpp	\
+		tests.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -37,7 +36,7 @@ fclean: clean
 
 re: fclean all
 
-%.o: %.cpp PhoneBook.hpp Contact.hpp
+%.o: %.cpp Account.hpp
 	@$(CC) $(FLAGS) $< -c -o $@
 
 $(NAME): $(OBJS)
