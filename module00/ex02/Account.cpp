@@ -137,6 +137,6 @@ void	Account::_displayTimestamp(void)
 			<< '0' << time.tm_mon + 1
 			<< '0' << time.tm_mday
 			<< '_' << time.tm_hour
-			<< '0' << time.tm_min
+			<< time.tm_min
 			<< time.tm_sec << "] ";
 }
