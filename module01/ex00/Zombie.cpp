@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 11:14:28 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/10 14:11:37 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:19:45 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ Zombie::Zombie(std::string name)
 
 Zombie::~Zombie(void)
 {
+	std::cout << this->_name << " has been killed" << std::endl;
 	return ;
 }
 

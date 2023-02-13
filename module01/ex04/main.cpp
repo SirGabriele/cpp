@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:49:18 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/13 11:54:14 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/02/13 20:57:32 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,25 +18,28 @@ static void	replace_strings(char *s1, char *s2, std::ifstream &infile, std::ofst
 {
 	std::string	toSearch;
 	std::string	toReplace;
-	std::string	buffer;
-	size_t		pos;
+	std::string	finalBuffer;
+	std::string	tempBuffer;
+	size_t		i;
 
 	toSearch = s1;
 	toReplace = s2;
-	do
-	{
-		std::getline(infile, buffer);
-		if ((pos = buffer.find(toSearch)) && pos == std::string::npos)
-			outfile << buffer;
-		else
+	if (toSearch == toReplace || toSearch.length() == 0)
+		return ;
+	std::getline(infile, finalBuffer);
+	finalBuffer += "\n";
+		while (std::getline(infile, tempBuffer))
 		{
-			outfile << buffer.substr(0, pos);
-			outfile << toReplace;
-			outfile << buffer.substr(pos + toSearch.length(), buffer.length());
+			finalBuffer += tempBuffer;
+			finalBuffer += "\n";
 		}
-		if (infile.peek() != EOF)
-			outfile << std::endl;
-	} while (infile.eof() == false);
+	i = 0;
+	while ((i = finalBuffer.find(toSearch)) != std::string::npos)
+	{
+		finalBuffer.erase(i, toSearch.length());
+		finalBuffer.insert(i, toReplace);
+	}
+	outfile << finalBuffer;
 	infile.close();
 	outfile.close();
 }

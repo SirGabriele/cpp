@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 14:19:51 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/10 14:39:23 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/02/13 18:22:03 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,5 @@ int	main(void)
 	for (int i = 0; i < N; i++)
 		horde[i].announce();
 	delete [] horde;
-	std::cout << "Sorry son the horde was rabid, had to put it down" << std::endl;
 	return (0);
 }

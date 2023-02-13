@@ -1,33 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 11:05:10 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/10 13:25:55 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/02/13 14:45:42 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/02/13 17:59:56 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef HARL_H
+# define HARL_H
 
+# include <string>
 # include <iostream>
+# define NB_FUNC 4
 
-class	Zombie
+class	Harl
 {
 public:
 
-	Zombie(std::string name);
-	~Zombie(void);
+	Harl(void);
+	~Harl(void);
 
-	void	announce(void);
+	void				complain(std::string level);
 
 private:
 
-	std::string	_name;
+	void	debug(void);
+	void	info(void);
+	void	warning(void);
+	void	error(void);
 };
 
-#endif /*ZOMBIE_HPP*/
+#endif /*HARL_H*/

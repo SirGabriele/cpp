@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 11:05:10 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/10 13:25:55 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/02/13 15:29:43 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/02/13 16:56:59 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "Harl.hpp"
 
-# include <iostream>
-
-class	Zombie
+int	main(void)
 {
-public:
+	Harl	obj;
 
-	Zombie(std::string name);
-	~Zombie(void);
-
-	void	announce(void);
-
-private:
-
-	std::string	_name;
-};
-
-#endif /*ZOMBIE_HPP*/
+	obj.complain("debug");
+	obj.complain("info");
+	obj.complain("warning");
+	obj.complain("error");
+	obj.complain("doesnt exist");
+	return (0);
+}

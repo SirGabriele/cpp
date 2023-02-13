@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.hpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/10 11:05:10 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/10 13:25:55 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/02/13 15:29:43 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/02/13 18:05:18 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#include "Harl.hpp"
 
-# include <iostream>
-
-class	Zombie
+int	main(int argc, char **argv)
 {
-public:
+	Harl	obj;
 
-	Zombie(std::string name);
-	~Zombie(void);
-
-	void	announce(void);
-
-private:
-
-	std::string	_name;
-};
-
-#endif /*ZOMBIE_HPP*/
+	if (argc != 2)
+	{
+		std::cout << "Correst usage is ./harlFilter <level name>";
+		return (1);
+	}
+	obj.complain(argv[1]);
+	return (0);
+}
