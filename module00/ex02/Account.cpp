@@ -135,8 +135,8 @@ void	Account::_displayTimestamp(void)
 	time = *std::localtime(&now);
 	std::cout << "[" << time.tm_year + 1900
 			<< '0' << time.tm_mon + 1
-			<< '0' << time.tm_mday
+			<< time.tm_mday
 			<< '_' << time.tm_hour
-			<< time.tm_min
+			<< '0' << time.tm_min
 			<< time.tm_sec << "] ";
 }
