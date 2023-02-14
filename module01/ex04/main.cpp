@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/10 17:49:18 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/13 20:57:32 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/02/14 11:32:55 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ static void	replace_strings(char *s1, char *s2, std::ifstream &infile, std::ofst
 
 	toSearch = s1;
 	toReplace = s2;
-	if (toSearch == toReplace || toSearch.length() == 0)
-		return ;
 	std::getline(infile, finalBuffer);
 	finalBuffer += "\n";
-		while (std::getline(infile, tempBuffer))
-		{
-			finalBuffer += tempBuffer;
+	while (std::getline(infile, tempBuffer))
+	{
+		finalBuffer += tempBuffer;
+		if (infile.eof() == false)
 			finalBuffer += "\n";
-		}
+	}
 	i = 0;
-	while ((i = finalBuffer.find(toSearch)) != std::string::npos)
+	while (((i = finalBuffer.find(toSearch)) != std::string::npos)
+		&& toSearch != toReplace && toSearch.length() != 0)
 	{
 		finalBuffer.erase(i, toSearch.length());
 		finalBuffer.insert(i, toReplace);
