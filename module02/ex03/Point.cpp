@@ -34,7 +34,7 @@ Point::~Point(void)
 
 Point	&Point::operator=(const Point &src)
 {
-	std::cerr << "Point class has const private attributes. Thus you can not assign one Point to another" << std::endl;
+	std::cerr << "Point class has const private attributes. Thus you can not assign a Point instance to another" << std::endl;
 	(void)src;
 	return (*this);
 }
@@ -48,27 +48,3 @@ const Fixed	&Point::getY(void) const
 {
 	return (this->_y);
 }
-
-/*Fixed	Point::getArea(const Fixed &baseLengthA, const Fixed &baseLengthB, const Fixed &baseLengthC) const
-{
-	Fixed	res;
-	Fixed	baseLength;
-	Fixed	altitude;
-
-	(void)baseLengthA;
-	(void)baseLengthB;
-	(void)baseLengthC;
-	return (res);
-}
-
-Fixed	Point::getLength(const Point &a, const Point &b) const
-{
-	Fixed	aX = a.getX();
-	Fixed	bX = b.getX();
-	Fixed	aY = a.getY();
-	Fixed	bY = b.getY();
-	float	length;
-
-	length = sqrt(pow((bX - aX).toFloat(), 2) + pow((bY - aY).toFloat(), 2));
-	return (Fixed(length));
-}*/
