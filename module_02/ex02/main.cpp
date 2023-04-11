@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/04 19:23:22 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/06 19:33:07 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/08 13:45:37 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int main (void)
 
 	std::cout << "\nPostfix decrementation" << '\n';
 	std::cout << "a = " << a << '\n';
-	std::cout << "a-- = " << a << '\n';
+	std::cout << "a-- = " << a-- << '\n';
 	std::cout << "a = " << a << '\n';
 /*	END OF [PRE/POST][IN/DE]CREMENTATIONS	TESTS	*/
 

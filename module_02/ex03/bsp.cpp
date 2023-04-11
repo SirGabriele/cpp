@@ -12,10 +12,6 @@
 
 #include "Point.hpp"
 
-/*
-area = 0.25 * √( (a + b + c) * (-a + b + c) * (a - b + c) * (a + b - c) )
-*/
-
 static Fixed	getArea(const Fixed &baseLengthA, const Fixed &baseLengthB,
 	const Fixed &baseLengthC)
 {
@@ -44,10 +40,17 @@ static	Fixed	getLength(const Point &a, const Point &b)
 
 bool	bsp(Point const a, Point const b, Point const c, Point const point)
 {
+	Point	pointNonConst(point);
+
+	if (pointNonConst == a || pointNonConst == b || pointNonConst == c)
+	{
+		std::cout << "point is on one of the triangle's vertices" << std::endl;
+		return (false);
+	}
+
 	Fixed	ABLength(getLength(a, b));
 	Fixed	BCLength(getLength(b, c));
 	Fixed	ACLength(getLength(a, c));
-
 	Fixed	APLength(getLength(a, point));
 	Fixed	BPLength(getLength(b, point));
 	Fixed	CPLength(getLength(c, point));
@@ -57,14 +60,21 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point)
 	Fixed	BCPArea(getArea(BCLength, CPLength, BPLength));
 	Fixed	APCArea(getArea(APLength, ACLength, CPLength));
 
-	Fixed	sumSmallTriangles = ABPArea + BCPArea + APCArea;
+	if (ABPArea == 0 || BCPArea == 0 || APCArea == 0)
+	{
+		std::cout << "point is on one of the triangle's edges" << std::endl;
+		return (false);
+	}
+
+	Fixed	sumSubTriangles = ABPArea + BCPArea + APCArea;
+
 	std::cout << "ABP Area = " << ABPArea << '\n';
 	std::cout << "BCP Area = " << BCPArea << '\n';
 	std::cout << "APC Area = " << APCArea << '\n';
-	std::cout << "Sum of 3 smaller triangles = " << sumSmallTriangles << '\n';
+	std::cout << "Sum of 3 subtriangles = " << sumSubTriangles << '\n';
 	std::cout << "ABC Area = " << ABCArea << '\n';
 	
-	if (sumSmallTriangles - ABCArea <= Fixed(0.1f))
+	if (sumSubTriangles - ABCArea <= Fixed(0.1f))
 		return (true);
 	return (false);
 }

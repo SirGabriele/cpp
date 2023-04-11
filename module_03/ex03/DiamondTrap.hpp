@@ -29,6 +29,12 @@ class	DiamondTrap: public FragTrap, public ScavTrap
 
 		void	whoAmI(void);
 
+		std::string		getName(void);
+		unsigned int	getHitPoints(void);
+		unsigned int	getEnergyPoints(void);
+		unsigned int	getAttackDamage(void);
+		unsigned int	getMaxHitPoints(void);
+
 	private:
 		std::string	_name;
 };

@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:30:05 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/07 15:00:52 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:27:38 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ class	Point
 		Point(const float xPos, const float yPos);
 		~Point(void);
 		Point	&operator=(const Point &src);
+
+		bool	operator==(const Point &toCompare);
 
 		const Fixed	&getX(void) const;
 

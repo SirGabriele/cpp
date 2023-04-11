@@ -3,24 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
+/*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/13 15:29:43 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/02/13 18:05:18 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/04 19:23:22 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/08 15:11:33 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#include "Fixed.hpp"
 
-int	main(int argc, char **argv)
+int main (void)
 {
-	Harl	obj;
+	Fixed	a;
+	Fixed	b(a);
+	Fixed	c;
 
-	if (argc != 2)
-	{
-		std::cout << "Correst usage is ./harlFilter <level name>";
-		return (1);
-	}
-	obj.complain(argv[1]);
-	return (0);
+	c = b;
+	std::cout << a.getRawBits() << std::endl;
+	a.setRawBits(50);
+	std::cout << a.getRawBits() << std::endl;
+	std::cout << b.getRawBits() << std::endl;
+	std::cout << c.getRawBits() << std::endl;
+	return 0;
 }

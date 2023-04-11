@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
-#include "Point.hpp"
 
 Fixed::Fixed(void): _value(0)
 {
@@ -40,7 +39,8 @@ Fixed::~Fixed(void)
 
 Fixed &Fixed::operator=(const Fixed &src)
 {
-	this->_value = src.getRawBits();
+	if (this != &src)
+		this->_value = src.getRawBits();
 	return (*this);
 }
 
@@ -51,7 +51,7 @@ int	Fixed::getRawBits(void) const
 
 void	Fixed::setRawBits(int const raw)
 {
-	(void)raw;
+	_value = raw;
 }
 
 int	Fixed::toInt(void) const
@@ -149,6 +149,38 @@ Fixed	Fixed::operator/(const Fixed &toDivide)
 	return (res);
 }
 /*	END OF ARITHMETIC OPERATORS*/
+
+/*	PREFIX INCREMENTATION	*/
+Fixed	Fixed::operator++(void)
+{
+	this->_value++;
+	return (*this);
+}
+
+/*	POSTFIX INCREMENTATION	*/
+Fixed	Fixed::operator++(int)
+{
+	Fixed	save(*this);
+
+	this->_value++;
+	return (save);
+}
+
+/*	PREFIX DECREMENTATION	*/
+Fixed	Fixed::operator--(void)
+{
+	this->_value--;
+	return (*this);
+}
+
+/*	POSTFIX DECREMENTATION	*/
+Fixed	Fixed::operator--(int)
+{
+	Fixed	save(*this);
+
+	this->_value--;
+	return (save);
+}
 
 Fixed	&Fixed::min(Fixed &a, Fixed &b)
 {

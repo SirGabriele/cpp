@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 19:34:42 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/07 14:53:42 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/08 15:29:22 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,15 @@ Point	&Point::operator=(const Point &src)
 	std::cerr << "Point class has const private attributes. Thus you can not assign a Point instance to another" << std::endl;
 	(void)src;
 	return (*this);
+}
+
+bool	Point::operator==(const Point &toCompare)
+{
+	if (this->getX().getRawBits() == toCompare.getX().getRawBits()
+		&& this->getY().getRawBits() == toCompare.getY().getRawBits())
+		return (true);
+	else
+		return (false);
 }
 
 const Fixed	&Point::getX(void) const

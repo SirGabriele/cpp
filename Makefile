@@ -6,21 +6,17 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/04/11 15:07:24 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/04/04 19:59:29 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = diamondtrap
+NAME = 
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =	ClapTrap.cpp	\
-		FragTrap.cpp	\
-		ScavTrap.cpp	\
-		DiamondTrap.cpp	\
-		main.cpp
+SRCS =
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -39,7 +35,7 @@ fclean: clean
 
 re: fclean all
 
-%.o: %.cpp ClapTrap.hpp ScavTrap.hpp FragTrap.hpp DiamondTrap.hpp
+%.o: %.cpp .hpp
 	@$(CC) $(FLAGS) $< -c -o $@
 
 $(NAME): $(OBJS)
