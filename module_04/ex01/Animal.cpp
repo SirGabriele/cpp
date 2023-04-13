@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:59:39 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 19:17:55 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/11 18:37:30 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/11 19:16:11 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Animal.hpp"
 
-Cat::Cat(void): Animal()
+Animal::Animal(void): type("Animal")
 {
-	std::cout << "Cat default constructor called" << std::endl;
-	this->type = "Cat";
+	std::cout << "Animal default constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat &src): Animal()
+Animal::Animal(const Animal &src)
 {
-	std::cout << "Cat copy constructor called" << std::endl;
+	std::cout << "Animal copy constructor called" << std::endl;
 	*this = src;
 }
 
-Cat::~Cat(void)
+Animal::~Animal(void)
 {
-	std::cout << "Cat destructor called" << std::endl;
+	std::cout << "Animal destructor called" << std::endl;
 }
 
-Cat	&Cat::operator=(const Cat &src)
+Animal	&Animal::operator=(const Animal &src)
 {
 	if (this != &src)
 	{
@@ -38,7 +37,12 @@ Cat	&Cat::operator=(const Cat &src)
 	return (*this);
 }
 
-void	Cat::makeSound(void)
+void	Animal::makeSound(void)
 {
-	std::cout << "*meows*" << std::endl;
+	std::cout << "*undefined animal noise*" << std::endl;
+}
+
+std::string	Animal::getType(void)
+{
+	return (this->type);
 }

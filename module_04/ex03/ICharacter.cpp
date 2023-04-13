@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   ICharacter.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:59:35 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 19:06:38 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/13 19:12:47 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/13 19:13:14 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#pragma once
-#ifndef CAT_HPP
-# define CAT_HPP
+#include "ICharacter.hpp"
 
-# include "Animal.hpp"
-
-class	Cat: public Animal
+ICharacter::~ICharacter(void)
 {
-	public:
-		Cat(void);
-		Cat(const Cat &src);
-		~Cat(void);
-
-		Cat	&operator=(const Cat &src);
-
-		void	makeSound(void);
-};
-
-#endif /*CAT_HPP*/
+	std::cout << "ICharacter destructor called" << std::endl;
+}

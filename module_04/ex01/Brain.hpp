@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Brain.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:59:35 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 19:06:38 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/13 14:17:31 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/13 14:51:47 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef BRAIN_HPP
+# define BRAIN_HPP
 
-# include "Animal.hpp"
+# include <iostream>
+# include <string>
 
-class	Cat: public Animal
+class	Brain
 {
 	public:
-		Cat(void);
-		Cat(const Cat &src);
-		~Cat(void);
+		Brain(void);
+		Brain(const Brain &src);
+		~Brain(void);
 
-		Cat	&operator=(const Cat &src);
-
-		void	makeSound(void);
+		Brain	&operator=(const Brain &src);
+		
+		const std::string	&getIdea(int i) const;
+		void				setIdea(int i, const std::string &idea);
+		
+		std::string	_ideas[100];
 };
 
-#endif /*CAT_HPP*/
+#endif /*BRAIN_HPP*/

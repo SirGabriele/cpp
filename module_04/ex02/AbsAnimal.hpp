@@ -1,31 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:59:35 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 19:06:38 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/11 18:37:26 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/11 19:16:33 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef ABSANIMAL_HPP
+# define ABSANIMAL_HPP
 
-# include "Animal.hpp"
+# include <string>
+# include <iostream>
+# define ARR_SIZE 6
 
-class	Cat: public Animal
+class	AbsAnimal
 {
 	public:
-		Cat(void);
-		Cat(const Cat &src);
-		~Cat(void);
+		AbsAnimal(void);
+		AbsAnimal(const AbsAnimal &src);
+		virtual ~AbsAnimal(void);
 
-		Cat	&operator=(const Cat &src);
+		AbsAnimal	&operator=(const AbsAnimal &src);
 
-		void	makeSound(void);
+		virtual void	makeSound(void) = 0;
+
+		std::string	getType(void);
+
+	protected:
+		std::string	type;
 };
 
-#endif /*CAT_HPP*/
+#endif /*AbsANIMAP_HPP*/

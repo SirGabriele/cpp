@@ -1,44 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.cpp                                            :+:      :+:    :+:   */
+/*   Ice.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:59:39 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 19:17:55 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/13 17:10:49 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/13 18:33:25 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Cat.hpp"
+#include "Ice.hpp"
+#include "AMateria.hpp"
 
-Cat::Cat(void): Animal()
+Ice::Ice(void): AMateria()
 {
-	std::cout << "Cat default constructor called" << std::endl;
-	this->type = "Cat";
+	std::cout << "Ice default constructor called" << std::endl;
+	this->_type = "ice";
 }
 
-Cat::Cat(const Cat &src): Animal()
+Ice::Ice(const Ice &src): AMateria()
 {
-	std::cout << "Cat copy constructor called" << std::endl;
+	std::cout << "Ice copy constructor called" << std::endl;
 	*this = src;
 }
 
-Cat::~Cat(void)
+Ice::~Ice(void)
 {
-	std::cout << "Cat destructor called" << std::endl;
+	std::cout << "Ice destructor called" << std::endl;
 }
 
-Cat	&Cat::operator=(const Cat &src)
+Ice	&Ice::operator=(const Ice &src)
 {
-	if (this != &src)
-	{
-		this->type = src.type;
-	}
+	(void)src;
 	return (*this);
 }
 
-void	Cat::makeSound(void)
+AMateria	*Ice::clone(void) const
 {
-	std::cout << "*meows*" << std::endl;
+	AMateria	*cloned = new Ice();
+
+	return (cloned);
 }

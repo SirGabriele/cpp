@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "Cat.hpp"
+#include "Brain.hpp"
 
 Cat::Cat(void): Animal()
 {
 	std::cout << "Cat default constructor called" << std::endl;
 	this->type = "Cat";
+	this->_brain = new Brain();
 }
 
 Cat::Cat(const Cat &src): Animal()
@@ -27,6 +29,7 @@ Cat::Cat(const Cat &src): Animal()
 Cat::~Cat(void)
 {
 	std::cout << "Cat destructor called" << std::endl;
+	delete this->_brain;
 }
 
 Cat	&Cat::operator=(const Cat &src)
@@ -34,6 +37,8 @@ Cat	&Cat::operator=(const Cat &src)
 	if (this != &src)
 	{
 		this->type = src.type;
+		for (int i = 0; i < 100; i++)
+			this->_brain->_ideas[i] = src._brain->_ideas[i];
 	}
 	return (*this);
 }

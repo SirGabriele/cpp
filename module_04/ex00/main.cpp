@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 19:30:59 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 20:48:23 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/13 14:15:47 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,56 @@ static void	defaultConstructors(void)
 	}
 }
 
+static void	copyConstructors(void)
+{
+//	return ;
+	{
+		line();
+		std::cout << "Animal *A = new Animal();" << '\n';
+		Animal	*A = new Animal();
+		std::cout << "Animal B = new Cat();" << '\n';
+		Animal *B = new Cat();
+		std::cout << "*A = *B;" << '\n';
+		*A = *B;
+		std::cout << "delete B;" << '\n';
+		delete B;
+		std::cout << "A.makeSound()" << '\n';
+		A->makeSound();
+		std::cout << "type = " << A->getType() << '\n';
+		delete A;
+	}
+	{
+		line();
+		std::cout << "Animal *A = new Animal();" << '\n';
+		Animal	*A = new Animal();
+		std::cout << "Animal B = new Dog();" << '\n';
+		Animal *B = new Dog();
+		std::cout << "*A = *B;" << '\n';
+		*A = *B;
+		std::cout << "delete B;" << '\n';
+		delete B;
+		std::cout << "A.makeSound()" << '\n';
+		A->makeSound();
+		std::cout << "type = " << A->getType() << '\n';
+		delete A;
+	}
+	{
+		line();
+		std::cout << "WrongAnimal *A = new WrongAnimal();" << '\n';
+		WrongAnimal	*A = new WrongAnimal();
+		std::cout << "WrongAnimal B = new WrongCat();" << '\n';
+		WrongAnimal *B = new WrongCat();
+		std::cout << "*A = *B;" << '\n';
+		*A = *B;
+		std::cout << "delete B;" << '\n';
+		delete B;
+		std::cout << "A.makeSound()" << '\n';
+		A->makeSound();
+		std::cout << "type = " << A->getType() << '\n';
+		delete A;
+	}
+}
+
 static void	polymorphism(void)
 {
 //	return ;
@@ -80,7 +130,7 @@ static void	polymorphism(void)
 	}
 	{
 		line();
-		std::cout << "Animal *A = new Cat()" << '\n';
+		std::cout << "dfkohnfodnhfdphAnimal *A = new Cat()" << '\n';
 		Animal	*A = new Cat();
 		std::cout << "A.makeSound()" << '\n';
 		A->makeSound();
@@ -195,6 +245,7 @@ static void	deepCopy(void)
 int	main(void)
 {
 	defaultConstructors();
+	copyConstructors();
 	polymorphism();
 	deepCopy();
 	line();

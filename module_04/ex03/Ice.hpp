@@ -1,31 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Cat.hpp                                            :+:      :+:    :+:   */
+/*   Ice.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 18:59:35 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/11 19:06:38 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/13 17:10:45 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/13 18:13:52 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef CAT_HPP
-# define CAT_HPP
+#ifndef ICE_HPP
+# define ICE_HPP
 
-# include "Animal.hpp"
+# include "AMateria.hpp"
 
-class	Cat: public Animal
+class	Ice: public AMateria
 {
 	public:
-		Cat(void);
-		Cat(const Cat &src);
-		~Cat(void);
+		Ice(void);
+		Ice(const Ice &src);
+		~Ice(void);
 
-		Cat	&operator=(const Cat &src);
+		Ice	&operator=(const Ice &src);
 
-		void	makeSound(void);
+		virtual AMateria	*clone(void) const;
 };
 
-#endif /*CAT_HPP*/
+#endif /*ICE_HPP*/
