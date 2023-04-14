@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.cpp                                     :+:      :+:    :+:   */
+/*   IMateriaSource.hpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/13 19:12:47 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/13 19:13:14 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/04/13 18:34:38 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/04/14 17:01:29 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ICharacter.hpp"
+#pragma once
+#ifndef IMATERIASOURCE_HPP
+# define IMATERIASOURCE_HPP
 
-ICharacter::~ICharacter(void)
+# include <string>
+# include <iostream>
+
+class	AMateria;
+
+class	IMateriaSource
 {
-	std::cout << "ICharacter virtual destructor called" << std::endl;
-}
+	public:
+		virtual	~IMateriaSource();
+		virtual AMateria	*createMateria(const std::string &type) = 0;
+		virtual void		learnMateria(AMateria *src) = 0;
+};
+
+#endif /*IMATERIASOURCE_HPP*/

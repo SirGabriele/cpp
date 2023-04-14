@@ -14,24 +14,24 @@
 
 AMateria::AMateria(void)
 {
-	std::cout << "AMateria default constructor called" << std::endl;
+//	std::cout << "AMateria default constructor called" << std::endl;
 }
 
 AMateria::AMateria(const AMateria &src)
 {
-	std::cout << "AMateria copy constructor called" << std::endl;
+	//std::cout << "AMateria copy constructor called" << std::endl;
 	*this = src;
 }
 
 AMateria::AMateria(const std::string &type)
 {
-	std::cout << "AMateria parametric constructor called" << std::endl;
+	//std::cout << "AMateria parametric constructor called" << std::endl;
 	this->_type = type;
 }
 
 AMateria::~AMateria(void)
 {
-	std::cout << "AMateria destructor called" << std::endl;
+	//std::cout << "AMateria destructor called" << std::endl;
 }
 
 AMateria	&AMateria::operator=(const AMateria &src)

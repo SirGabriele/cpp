@@ -15,19 +15,19 @@
 
 Cure::Cure(void): AMateria()
 {
-	std::cout << "Cure default constructor called" << std::endl;
+	//std::cout << "Cure default constructor called" << std::endl;
 	this->_type = "cure";
 }
 
 Cure::Cure(const Cure &src): AMateria()
 {
-	std::cout << "Cure copy constructor called" << std::endl;
+//	std::cout << "Cure copy constructor called" << std::endl;
 	*this = src;
 }
 
 Cure::~Cure(void)
 {
-	std::cout << "Cure destructor called" << std::endl;
+	//std::cout << "Cure destructor called" << std::endl;
 }
 
 Cure	&Cure::operator=(const Cure &src)

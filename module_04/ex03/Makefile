@@ -6,7 +6,7 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/04/13 19:13:25 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/04/14 17:21:49 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,19 +16,23 @@ CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =	AMateria.cpp	\
-		Ice.cpp			\
-		Cure.cpp		\
-		ICharacter.cpp	\
-		Character.cpp	\
+SRCS =	AMateria.cpp		\
+		Ice.cpp				\
+		Cure.cpp			\
+		ICharacter.cpp		\
+		Character.cpp		\
+		IMateriaSource.cpp	\
+		MateriaSource.cpp	\
 		main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-HEADERS =	AMateria.hpp	\
-			Ice.hpp			\
-			Cure.hpp		\
-			ICharacter.hpp	\
+HEADERS =	AMateria.hpp		\
+			Ice.hpp				\
+			Cure.hpp			\
+			ICharacter.hpp		\
+			IMateriaSource.hpp	\
+			MateriaSource.hpp	\
 			Character.hpp
 
 all: $(NAME)

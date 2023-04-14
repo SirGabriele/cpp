@@ -12,27 +12,23 @@
 
 #include "Character.hpp"
 
-Character::Character(void): ICharacter()
+Character::Character(void)
 {
 	std::cout << "Character default constructor called" << std::endl;
 	this->_name = "Default";
-	this->_inventory[0] = NULL;
-	this->_inventory[1] = NULL;
-	this->_inventory[2] = NULL;
-	this->_inventory[3] = NULL;
+	for (int i = 0; i < INVENTORYSLOTS; i++)
+		this->_inventory[i] = NULL;
 }
 
-Character::Character(const std::string &name): ICharacter()
+Character::Character(const std::string &name)
 {
 	std::cout << "Character parametric constructor called" << std::endl;
 	this->_name = name;
-	this->_inventory[0] = NULL;
-	this->_inventory[1] = NULL;
-	this->_inventory[2] = NULL;
-	this->_inventory[3] = NULL;
+	for (int i = 0; i < INVENTORYSLOTS; i++)
+		this->_inventory[i] = NULL;
 }
 
-Character::Character(const Character &src): ICharacter()
+Character::Character(const Character &src)
 {
 	std::cout << "Character copy constructor called" << std::endl;
 	*this = src;
@@ -41,6 +37,8 @@ Character::Character(const Character &src): ICharacter()
 Character::~Character(void)
 {
 	std::cout << "Character destructor called" << std::endl;
+	for (int i = 0; i < INVENTORYSLOTS; i++)
+		delete this->getSlot(i);
 }
 
 Character	&Character::operator=(const Character &src)
@@ -48,16 +46,21 @@ Character	&Character::operator=(const Character &src)
 	if (this != &src)
 	{
 		for (int i = 0; i < INVENTORYSLOTS; i++)
-			this->_inventory[i] = src._inventory[i];
+		{
+			if (this->_inventory[i] != NULL)
+				delete this->_inventory[i];
+			if (src._inventory[i] != NULL)
+				this->_inventory[i] = src._inventory[i]->clone();
+		}
 	}
 	return (*this);
 }
 
 const AMateria	*Character::getSlot(int i) const
 {
-	if (i < 0 || i > INVENTORYSLOTS)
+	if (i < 0 || i > INVENTORYSLOTS - 1)
 	{
-		std::cerr << "The inventory slots go from 0 to 3" << std::endl;
+		std::cerr << "Action impossible. The inventory slots go from 0 to " << INVENTORYSLOTS - 1 << std::endl;
 		return (NULL);
 	}
 	else
@@ -73,10 +76,49 @@ void	Character::equip(AMateria *m)
 {
 	int	i = 0;
 
-	while (this->_inventory[i] != NULL)
-		i++;
-	if (i == 3)
+	if (m == NULL)
+	{
+		std::cerr << "Can not equip this Materia for it is equal to NULL." << std::endl;
 		return ;
+	}
+	while (i < INVENTORYSLOTS && this->_inventory[i] != NULL && this->_inventory[i] != m)
+		i++;
+	if (this->_inventory[i] == m)
+	{
+		std::cerr << "Can not equip this Materia for it is already in the inventory" << std::endl;
+		return ;
+	}
+	if (i == INVENTORYSLOTS)
+	{
+		std::cerr << "Can not equip this Materia for this Character's inventory is full" << std::endl;
+		return ;
+	}
 	else
 		this->_inventory[i] = m;
+}
+
+void	Character::unequip(int idx)
+{
+	if (idx < 0 || idx > INVENTORYSLOTS - 1)
+	{
+		std::cerr << "Action impossible. The inventory slots go from 0 to " << INVENTORYSLOTS - 1<< std::endl;
+		return ;
+	}
+	else if (this->_inventory[idx] != NULL)
+		this->_inventory[idx] = NULL;
+	else
+		std::cerr << "Can not unequip item in slot " << idx << ". Slot is empty" << std::endl;
+}
+
+void	Character::use(int idx, ICharacter &target)
+{
+	if (idx < 0 || idx > INVENTORYSLOTS - 1)
+	{
+		std::cerr << "Action impossible. The inventory slots go from 0 to " << INVENTORYSLOTS - 1<< std::endl;
+		return ;
+	}
+	else if (this->_inventory[idx] == NULL)
+		std::cout << "Can not use this Materia for there is nothing in this slot" << std::endl;
+	else
+		this->_inventory[idx]->use(target);	
 }

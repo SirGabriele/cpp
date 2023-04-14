@@ -31,9 +31,8 @@ class	Character: public ICharacter
 		const AMateria		*getSlot(int i) const;
 		const std::string	&getName(void) const;
 		void				equip(AMateria *m);
-		
-//		virtual void				unequip(int idx) = 0;
-//		virtual void				use(int idx, ICharacter &target) = 0;
+		void		unequip(int idx);
+		void		use(int idx, ICharacter &target);
 
 	private:
 		AMateria	*_inventory[INVENTORYSLOTS];

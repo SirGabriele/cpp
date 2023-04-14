@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ICharacter.cpp                                     :+:      :+:    :+:   */
+/*   IMateriaSource.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 19:12:47 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/13 19:13:14 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:10:01 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ICharacter.hpp"
+#include "IMateriaSource.hpp"
 
-ICharacter::~ICharacter(void)
+IMateriaSource::~IMateriaSource(void)
 {
-	std::cout << "ICharacter virtual destructor called" << std::endl;
+	std::cout << "IMateriaSource virtual destructor called" << std::endl;
 }
