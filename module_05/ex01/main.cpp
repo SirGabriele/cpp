@@ -45,7 +45,7 @@ int	main(void)
 	}
 	catch (std::exception &exception)
 	{
-		std::cout << exception.what() << std::endl;
+		std::cerr << exception.what() << std::endl;
 	}
 			line();
 	return (0);
