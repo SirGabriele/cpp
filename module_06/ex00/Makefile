@@ -6,30 +6,17 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/04/24 14:18:02 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/04/04 19:59:29 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = intern
+NAME = 
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =	Bureaucrat.cpp				\
-		AForm.cpp					\
-		ShrubberyCreationForm.cpp	\
-		RobotomyRequestForm.cpp		\
-		PresidentialPardonForm.cpp	\
-		Intern.cpp					\
-		main.cpp
-
-HEADERS =	Bureaucrat.hpp				\
-			AForm.hpp					\
-			ShrubberyCreationForm.hpp	\
-			RobotomyRequestForm.hpp		\
-			Intern.hpp					\
-			PresidentialPardonForm.hpp
+SRCS =
 
 OBJS = $(SRCS:.cpp=.o)
 
@@ -48,7 +35,7 @@ fclean: clean
 
 re: fclean all
 
-%.o: %.cpp $(HEADERS)
+%.o: %.cpp .hpp
 	@$(CC) $(FLAGS) $< -c -o $@
 
 $(NAME): $(OBJS)

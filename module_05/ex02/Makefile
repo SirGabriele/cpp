@@ -6,11 +6,11 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/04/18 18:24:25 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/04/24 14:18:22 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = bureaucrat
+NAME = form
 
 CC = c++
 

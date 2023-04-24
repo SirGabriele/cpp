@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:42:06 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/24 10:29:04 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/24 14:17:37 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 
 int	main(void)
 {
-	Bureaucrat	jerome("Jérome", 10);
+	Bureaucrat	jerome("Jérome", 1);
 	Intern		flunky;
-	AForm		*form;
+	AForm		*form = NULL;
 
 	try
 	{
