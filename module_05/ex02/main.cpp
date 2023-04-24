@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:42:06 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/18 18:26:20 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/24 09:04:45 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	pres(void)
 
 static void	robot(void)
 {
-	return;
+//	return;
 	AForm	*A = new RobotomyRequestForm("Colette");
 
 	try
@@ -64,15 +64,15 @@ static void	robot(void)
 
 static void	shru(void)
 {
-	return;
-	AForm	*A = new ShrubberyCreationForm("file");
+//	return;
+	AForm	*A = new ShrubberyCreationForm("AmazonRainforest");
 
 	try
 	{
 		Bureaucrat	signOnTheDot("signOnTheDot", 145);
 		Bureaucrat	executeOnTheDot("executeOnTheDot", 137);
 
-		std::cout << *A << std::endl;
+		std::cout << *A << '\n' << '\n';
 		signOnTheDot.executeForm(*A);		/*	Executing a non signed form	*/
 		signOnTheDot.signForm(*A);			/*	Signing form	*/
 		executeOnTheDot.executeForm(*A);	/*	Executing a signed form	*/

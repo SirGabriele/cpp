@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:12:22 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/17 19:37:42 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/24 08:37:48 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	main(void)
 	{
 		Bureaucrat	A;
 		Bureaucrat	B("Bébère");
-		Bureaucrat	C(-1);
-		Bureaucrat	D("Yannis", 149);
+		Bureaucrat	C(149);
+		Bureaucrat	D("Yannis", 2);
 	
 		std::cout << "A:\n" << A << '\n'
 				<< "B:\n" << B << '\n'

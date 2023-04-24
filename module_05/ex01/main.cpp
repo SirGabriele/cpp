@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 17:12:22 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/17 19:46:12 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/24 08:48:28 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat	A("Bébère", 5);
+		Bureaucrat	A("Bébère", 50);
 		Bureaucrat	B;
 		Form		C;
 		Form		D("Death notice", false, 76, 6);

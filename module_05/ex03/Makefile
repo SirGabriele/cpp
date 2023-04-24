@@ -6,7 +6,7 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/04/18 18:24:25 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/04/24 09:35:02 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,14 @@ SRCS =	Bureaucrat.cpp				\
 		ShrubberyCreationForm.cpp	\
 		RobotomyRequestForm.cpp		\
 		PresidentialPardonForm.cpp	\
+		Intern.cpp					\
 		main.cpp
 
 HEADERS =	Bureaucrat.hpp				\
 			AForm.hpp					\
 			ShrubberyCreationForm.hpp	\
 			RobotomyRequestForm.hpp		\
+			Intern.hpp					\
 			PresidentialPardonForm.hpp
 
 OBJS = $(SRCS:.cpp=.o)

@@ -68,7 +68,7 @@ class	Bureaucrat
 		/*	END OF EXCEPTIONS	*/
 
 	private:
-		std::string	_name;
+		const std::string	_name;
 		unsigned int		_grade;
 };
 

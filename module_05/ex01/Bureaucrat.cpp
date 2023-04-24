@@ -67,7 +67,6 @@ Bureaucrat	&Bureaucrat::operator=(const Bureaucrat &src)
 {
 	if (this != &src)
 	{
-		this->_name = src._name;
 		this->_grade = src._grade;
 	}
 	return (*this);
@@ -85,18 +84,18 @@ const unsigned int	&Bureaucrat::getGrade(void) const
 
 void	Bureaucrat::promote(void)
 {
-	if (this->_grade < 150)
-		this->_grade++;
+	if (this->_grade > 1)
+		this->_grade--;
 	else
-		throw GradeTooLowException("Could not promote this Bureaucrat.");		
+		throw GradeTooHighException("Could not promote this Bureaucrat.");	
 }
 
 void	Bureaucrat::demote(void)
 {
-	if (this->_grade > 1)
-		this->_grade--;
+	if (this->_grade < 150)
+		this->_grade++;
 	else
-		throw GradeTooHighException("Could not demote this Bureaucrat.");
+		throw GradeTooLowException("Could not demote this Bureaucrat.");
 }
 
 void	Bureaucrat::signForm(Form &form)
