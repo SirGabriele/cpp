@@ -6,19 +6,17 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/04/27 14:01:57 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/04/28 10:42:49 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =	converter
+NAME =	serialization
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =	ScalarConverter.cpp	\
-		InvalidInput.cpp	\
-		main.cpp
+SRCS =	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 

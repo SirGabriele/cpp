@@ -53,6 +53,6 @@ void	PresidentialPardonForm::beSigned(Bureaucrat &employee)
 
 void	PresidentialPardonForm::execute(const Bureaucrat &executor) const
 {
-	std::cout << executor.getName() << " has been pardonned by Zaphod Beeblebrox." << std::endl;
+	std::cout << this->_target << " has been pardonned by Zaphod Beeblebrox." << std::endl;
 	std::cout << executor.getName() << " executed " << this->_name << std::endl;
 }

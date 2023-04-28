@@ -40,12 +40,6 @@ class	AForm
 		virtual void	beSigned(Bureaucrat &employee) = 0;
 		virtual	void	execute(const Bureaucrat &executor) const = 0;
 
-	protected:
-		const std::string	_name;
-		bool				_isSigned;
-		const int			_minGradeToSign;
-		const int			_minGradeToExecute;
-
 	/*	START OF EXCEPTIONS	*/
 	class	GradeTooHighException : public std::exception
 	{
@@ -71,6 +65,12 @@ class	AForm
 			const std::string	_errorMsg;
 	};
 	/*	END OF EXCEPTIONS	*/
+
+	protected:
+		const std::string	_name;
+		bool				_isSigned;
+		const int			_minGradeToSign;
+		const int			_minGradeToExecute;
 };
 
 std::ostream	&operator<<(std::ostream &out, const AForm &src);

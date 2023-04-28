@@ -16,6 +16,11 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+static void	line(void)
+{
+	std::cout << "--------------------------------------------------------------" << std::endl;
+}
+
 static void	pres(void)
 {
 //	return;
@@ -72,7 +77,7 @@ static void	shru(void)
 		Bureaucrat	signOnTheDot("signOnTheDot", 145);
 		Bureaucrat	executeOnTheDot("executeOnTheDot", 137);
 
-		std::cout << *A << '\n' << '\n';
+		std::cout << *A << '\n';;
 		signOnTheDot.executeForm(*A);		/*	Executing a non signed form	*/
 		signOnTheDot.signForm(*A);			/*	Signing form	*/
 		executeOnTheDot.executeForm(*A);	/*	Executing a signed form	*/
@@ -88,7 +93,9 @@ static void	shru(void)
 int	main(void)
 {
 	shru();
+		line();
 	robot();
+		line();
 	pres();
 	return (0);
 }
