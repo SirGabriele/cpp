@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 08:53:02 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/27 08:57:42 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:05:38 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	}
 	catch (std::exception &exception)
 	{
-		std::cout << exception.what() << std::endl;
+		std::cerr << exception.what() << std::endl;
 	}
 	return (0);
 }

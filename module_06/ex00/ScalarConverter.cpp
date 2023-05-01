@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 15:37:46 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/27 16:05:52 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/04/28 15:10:49 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,22 +182,22 @@ void	ScalarConverter::_convertToFloat(std::string input)
 	if (conv == std::numeric_limits<float>::max() || conv == std::numeric_limits<float>::min())
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << std::setprecision(9) << conv;
-	if (conv == floor(conv))
-		std::cout << ".0f" << std::endl;
-	else
-		std::cout << "f" << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << conv << 'f' << std::endl;
+/*	if (conv == floor(conv))
+		std::cout << ".0f" << std::endl;*/
+//	if
+//	std::cout << "f" << std::endl;
 }
 
 void	ScalarConverter::_convertToDouble(std::string input)
 {
-	float	conv = strtod(input.c_str(), NULL);
+	double	conv = strtod(input.c_str(), NULL);
 
 	std::cout << "double: ";
 	if (conv == std::numeric_limits<double>::max() || conv == std::numeric_limits<double>::min())
 		std::cout << "Non displayable" << std::endl;
 	else
-		std::cout << std::setprecision(9) << conv;
-	if (conv == floor(conv))
-		std::cout << ".0" << std::endl;
+		std::cout << std::fixed << std::setprecision(1) << conv << std::endl;
+/*	if (conv == floor(conv))
+		std::cout << ".0" << std::endl;*/
 }

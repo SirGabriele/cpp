@@ -31,6 +31,8 @@ Character::Character(const std::string &name)
 Character::Character(const Character &src)
 {
 	std::cout << "Character copy constructor called" << std::endl;
+	for (int i = 0; i < INVENTORYSLOTS; i++)
+		this->_inventory[i] = NULL;
 	*this = src;
 }
 
