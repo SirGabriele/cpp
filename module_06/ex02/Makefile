@@ -6,21 +6,21 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/05/01 14:26:55 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/05/01 14:49:52 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =	serialization
+NAME = 
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =	main.cpp	\
-		Data.cpp	\
-		Serializer.cpp
+SRCS =
 
 OBJS = $(SRCS:.cpp=.o)
+
+HEADERS =
 
 all: $(NAME)
 
@@ -37,7 +37,7 @@ fclean: clean
 
 re: fclean all
 
-%.o: %.cpp Serializer.hpp Data.hpp
+%.o: %.cpp $(HEADERS)
 	@$(CC) $(FLAGS) $< -c -o $@
 
 $(NAME): $(OBJS)

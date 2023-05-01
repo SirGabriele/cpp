@@ -25,29 +25,15 @@
 class	ScalarConverter
 {
 	public:
+		static void	convert(const std::string &input); 
+
+	private:
 		ScalarConverter(void);
 		ScalarConverter(const ScalarConverter &src);
 		~ScalarConverter(void);
 
 		ScalarConverter	&operator=(const ScalarConverter &src);
 
-		static void	convert(const std::string &input); 
-
-	/*	START OF EXCEPTION	*/
-	class	InvalidInput : public std::exception
-	{
-		public:
-			InvalidInput(void) throw();
-			InvalidInput(const std::string &str) throw();
-			~InvalidInput(void) throw();
-			const char	*what(void) const throw();
-
-		private:
-			std::string	_errMsg;
-	};
-	/*	END OF EXCEPTION	*/
-
-	private:
 		static bool		_isTypeObvious(const std::string &input);
 		static void		_setFlags(const std::string &input);
 		static void		_checkFlags(void);
@@ -62,6 +48,20 @@ class	ScalarConverter
 		static bool			_digitFound;
 		static bool			_signFound;
 		static bool			_fFound;
+
+	/*	START OF EXCEPTION	*/
+	class	InvalidInput : public std::exception
+	{
+		public:
+			InvalidInput(void) throw();
+			InvalidInput(const std::string &str) throw();
+			~InvalidInput(void) throw();
+			const char	*what(void) const throw();
+
+		private:
+			std::string	_errMsg;
+	};
+	/*	END OF EXCEPTION	*/
 };
 
 #endif /*SCALARCONVERTER_HPP*/

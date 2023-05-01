@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Serializer.hpp                                     :+:      :+:    :+:   */
+/*   Base.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 10:43:05 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/01 12:38:04 by kbrousse         ###   ########.fr       */
+/*   Created: 2023/05/01 14:50:22 by kbrousse          #+#    #+#             */
+/*   Updated: 2023/05/01 17:38:23 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
-#ifndef SERIALIZER_HPP
-# define SERIALIZER_HPP
+#ifndef BASE_HPP
 
-# include <string>
-# include "Data.hpp"
-# include <stdint.h>
-
-class	Serializer
+class	Base
 {
 	public:
-		static uintptr_t	serialize(Data *ptr);
-		static Data			*deserialize(uintptr_t raw);
-
-	private:
-		Serializer(void);
-		Serializer(const Serializer &src);
-		~Serializer(void);
-
-		Serializer	&operator=(const Serializer &src);
+		virtual ~Base(void);
+		
+		Base	*generate(void);
 };
 
-#endif /*SERIALIZER_HPP*/
+#endif /*BASE_HPP*/
