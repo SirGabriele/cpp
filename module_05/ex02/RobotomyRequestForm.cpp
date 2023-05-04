@@ -35,21 +35,18 @@ RobotomyRequestForm::~RobotomyRequestForm(void)
 RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &src)
 {
 	if (this != &src)
-	{
-		this->_isSigned = src._isSigned;
 		this->_target = src._target;
-	}
 	return (*this);
 }
 
 void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
-	if (this->_isSigned == false)
+	if (this->getSignStatus() == false)
 	{
 		std::cout << "This form has not been signed yet. Therefore it can not be executed" << std::endl;
 		return ;
 	}
-	else if (executor.getGrade() > (unsigned int)this->_minGradeToExecute)
+	else if (executor.getGrade() > (unsigned int)this->getMinGradeToExecute())
 		throw GradeTooLowException("This bureaucrat could not execute the form.");
 
 	int	randomValue = std::rand();
@@ -58,5 +55,5 @@ void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 		std::cout << this->_target << " has been robotomized successfully." << std::endl;
 	else
 		std::cout << this->_target << "'s robotomy failed." << std::endl;
-	std::cout << executor.getName() << " executed " << this->_name << std::endl;
+	std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }

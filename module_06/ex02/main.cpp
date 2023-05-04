@@ -109,7 +109,7 @@ int	main(void)
 	for (int i = 0; i < 100; i++)
 	{
 		p = generate();
-		identify(p);
+		identify(*p);
 		std::cout << "------------------------------------------------" << std::endl;
 	}
 	return (0);

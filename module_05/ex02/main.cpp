@@ -34,9 +34,9 @@ static void	pres(void)
 
 		std::cout << *A << std::endl;
 		signOnTheDot.executeForm(*A);		/*	Executing a non signed form	*/
-//		signOnTheDot.signForm(*A);			/*	Signing form	*/
+		signOnTheDot.signForm(*A);			/*	Signing form	*/
 //		noob.executeForm(*A);				/*	Noob can't execute	*/
-		A->execute(noob);					/*	Noob can't execute	*/
+//		A->execute(noob);					/*	Noob can't execute	*/
 		executeOnTheDot.executeForm(*A);	/*	Executing a signed form	*/
 		std::cout << *A << std::endl;
 	}

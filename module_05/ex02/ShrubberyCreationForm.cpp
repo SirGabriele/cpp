@@ -36,21 +36,18 @@ ShrubberyCreationForm::~ShrubberyCreationForm(void)
 ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationForm &src)
 {
 	if (this != &src)
-	{
-		this->_isSigned = src._isSigned;
 		this->_target = src._target;
-	}
 	return (*this);
 }
 
 void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
-	if (this->_isSigned == false)
+	if (this->getSignStatus() == false)
 	{
 		std::cout << "This form has not been signed yet. Therefore it can not be executed" << std::endl;
 		return ;
 	}
-	else if (executor.getGrade() > (unsigned int)this->_minGradeToExecute)
+	else if (executor.getGrade() > (unsigned int)this->getMinGradeToExecute())
 		throw GradeTooLowException("This bureaucrat could not execute the form.");
 
 	std::ofstream			outfile;
@@ -71,5 +68,5 @@ void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 			<< "             |||				     # }|{  #\n"
 			<< "       , -=-~  .-^- _				       }|{\n" << std::endl;
 	outfile.close();
-	std::cout << executor.getName() << " executed " << this->_name << std::endl;
+	std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }

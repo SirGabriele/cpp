@@ -153,10 +153,10 @@ void	ScalarConverter::_convertToChar(std::string input)
 	long	conv = strtol(input.c_str(), NULL, 10);
 
 	std::cout << "char: ";
-	if (conv < 32 || conv > 126)
-		std::cout << "Non displayable" << std::endl;
-	else if (ScalarConverter::_type == "char")
+	if (ScalarConverter::_type == "char")
 		std::cout << '\'' <<  input << '\'' << std::endl;
+	else if (conv < 32 || conv > 126)
+		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << '\'' << static_cast<char>(conv) << '\'' << std::endl;
 }
@@ -183,10 +183,6 @@ void	ScalarConverter::_convertToFloat(std::string input)
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << std::fixed << std::setprecision(1) << conv << 'f' << std::endl;
-/*	if (conv == floor(conv))
-		std::cout << ".0f" << std::endl;*/
-//	if
-//	std::cout << "f" << std::endl;
 }
 
 void	ScalarConverter::_convertToDouble(std::string input)
@@ -198,6 +194,4 @@ void	ScalarConverter::_convertToDouble(std::string input)
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << std::fixed << std::setprecision(1) << conv << std::endl;
-/*	if (conv == floor(conv))
-		std::cout << ".0" << std::endl;*/
 }

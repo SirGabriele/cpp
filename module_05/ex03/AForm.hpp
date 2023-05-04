@@ -41,36 +41,37 @@ class	AForm
 		virtual	void	execute(const Bureaucrat &executor) const = 0;
 
 	protected:
+		/*	START OF EXCEPTIONS	*/
+		class	GradeTooHighException : public std::exception
+		{
+			public:
+				GradeTooHighException(void) throw();
+				GradeTooHighException(std::string error) throw();
+				~GradeTooHighException(void) throw();
+				const char	*what(void) const throw();
+
+			private :
+				const std::string	_errorMsg;
+		};
+
+		class	GradeTooLowException : public std::exception
+		{
+			public:
+				GradeTooLowException(void) throw();
+				GradeTooLowException(std::string error) throw();
+				~GradeTooLowException(void) throw();
+				const char	*what(void) const throw();
+
+			private :
+				const std::string	_errorMsg;
+		};
+		/*	END OF EXCEPTIONS	*/
+
+	private:
 		const std::string	_name;
 		bool				_isSigned;
 		const int			_minGradeToSign;
 		const int			_minGradeToExecute;
-
-	/*	START OF EXCEPTIONS	*/
-	class	GradeTooHighException : public std::exception
-	{
-		public:
-			GradeTooHighException(void) throw();
-			GradeTooHighException(std::string error) throw();
-			~GradeTooHighException(void) throw();
-			const char	*what(void) const throw();
-
-		private :
-			const std::string	_errorMsg;
-	};
-
-	class	GradeTooLowException : public std::exception
-	{
-		public:
-			GradeTooLowException(void) throw();
-			GradeTooLowException(std::string error) throw();
-			~GradeTooLowException(void) throw();
-			const char	*what(void) const throw();
-
-		private :
-			const std::string	_errorMsg;
-	};
-	/*	END OF EXCEPTIONS	*/
 };
 
 std::ostream	&operator<<(std::ostream &out, const AForm &src);

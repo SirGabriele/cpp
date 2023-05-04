@@ -36,23 +36,20 @@ PresidentialPardonForm::~PresidentialPardonForm(void)
 PresidentialPardonForm	&PresidentialPardonForm::operator=(const PresidentialPardonForm &src)
 {
 	if (this != &src)
-	{
-		this->_isSigned = src._isSigned;
 		this->_target = src._target;
-	}
 	return (*this);
 }
 
 void	PresidentialPardonForm::execute(const Bureaucrat &executor) const
 {
-	if (this->_isSigned == false)
+	if (this->getSignStatus() == false)
 	{
 		std::cout << "This form has not been signed yet. Therefore it can not be executed" << std::endl;
 		return ;
 	}
-	else if (executor.getGrade() > (unsigned int)this->_minGradeToExecute)
+	else if (executor.getGrade() > (unsigned int)this->getMinGradeToExecute())
 		throw GradeTooLowException("This bureaucrat could not execute the form.");
 
 	std::cout << this->_target << " has been pardonned by Zaphod Beeblebrox." << std::endl;
-	std::cout << executor.getName() << " executed " << this->_name << std::endl;
+	std::cout << executor.getName() << " executed " << this->getName() << std::endl;
 }
