@@ -20,12 +20,7 @@ Form::Form(void): _name("Default"), _isSigned(false), _minGradeToSign(75), _minG
 
 Form::Form(std::string name, bool isSigned, const int minGradeToSign, const int minGradeToExecute): _name(name), _isSigned(isSigned), _minGradeToSign(minGradeToSign), _minGradeToExecute(minGradeToExecute)
 {
-	if (this->_minGradeToSign < 0 || this->_minGradeToExecute < 0)
-	{
-		std::cerr << "Please provide only positive values to create the form" << std::endl;
-		throw GradeTooLowException("Could not create this Form.");
-	}
-	else if (this->_minGradeToSign == 0 || this->_minGradeToExecute == 0)
+	if (this->_minGradeToSign <= 0 || this->_minGradeToExecute <= 0)
 		throw GradeTooHighException("Could not create this Form.");
 	else if (this->_minGradeToSign > 150 || this->_minGradeToExecute > 150)
 		throw GradeTooLowException("Could not create this Form.");

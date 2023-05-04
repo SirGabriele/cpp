@@ -11,41 +11,15 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
 
 Bureaucrat::Bureaucrat(void): _name("Default"), _grade(75)
 {
 
 }
 
-Bureaucrat::Bureaucrat(std::string name): _name(name), _grade(75)
-{
-
-}
-
-Bureaucrat::Bureaucrat(int grade): _name("Default"), _grade(grade)
-{
-	if (grade < 0)
-	{
-		std::cerr << "Please provide a positive value for the grade attribute" << std::endl;
-		throw GradeTooLowException("Could not create this Bureaucrat.");
-	}
-	else if (grade == 0)
-		throw GradeTooHighException("Could not create this Bureaucrat.");
-	else if (grade > 150)
-		throw GradeTooLowException("Could not create this Bureaucrat.");
-	else
-		_grade = grade;
-}
-
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 {
-	if (grade < 0)
-	{
-		std::cerr << "Please provide a positive value for the grade attribute" << std::endl;
-		throw GradeTooLowException("Could not create this Bureaucrat.");
-	}
-	else if (grade == 0)
+	if (grade <= 0)
 		throw GradeTooHighException("Could not create this Bureaucrat.");
 	else if (grade > 150)
 		throw GradeTooLowException("Could not create this Bureaucrat.");
@@ -87,7 +61,7 @@ void	Bureaucrat::promote(void)
 	if (this->_grade > 1)
 		this->_grade--;
 	else
-		throw GradeTooHighException("Could not promote this Bureaucrat.");	
+		throw GradeTooHighException("Could not promote this Bureaucrat.");
 }
 
 void	Bureaucrat::demote(void)

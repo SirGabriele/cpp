@@ -37,7 +37,7 @@ class	AForm
 		int					getMinGradeToSign(void) const;
 		int					getMinGradeToExecute(void) const;
 
-		virtual void	beSigned(Bureaucrat &employee) = 0;
+		virtual void	beSigned(Bureaucrat &employee);
 		virtual	void	execute(const Bureaucrat &executor) const = 0;
 
 	protected:

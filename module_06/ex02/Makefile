@@ -6,21 +6,25 @@
 #    By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/10 10:28:58 by kbrousse          #+#    #+#              #
-#    Updated: 2023/05/01 14:49:52 by kbrousse         ###   ########.fr        #
+#    Updated: 2023/05/02 14:55:03 by kbrousse         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 
+NAME = identify
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98 -g
 
-SRCS =
+SRCS =	Base.cpp	\
+		main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
-HEADERS =
+HEADERS =	Base.hpp	\
+			A.hpp		\
+			B.hpp		\
+			C.hpp
 
 all: $(NAME)
 

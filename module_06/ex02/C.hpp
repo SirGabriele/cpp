@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   C.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
+/*   Cy: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:55:08 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/01 14:56:38 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:01:54 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #ifndef C_HPP
+# define C_HPP
 
 class	C: public Base
 {

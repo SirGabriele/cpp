@@ -15,38 +15,205 @@
 
 static void	line(void)
 {
-	std::cout << "\n--------------------------------------------------------\n" << std::endl;
+	std::cout << "--------------------------------------------------------" << std::endl;
 }
 
 int	main(void)
 {
 	try
 	{
-		Bureaucrat	A("Bébère", 50);
-		Bureaucrat	B;
-		Form		C;
-		Form		D("Death notice", false, 76, 6);
-
-		std::cout << "Bureaucrat A:\n" << A << '\n'
-				<< "Bureaucrat B:\n" << B << '\n'
-				<< "Form C:\n" << C << '\n'
-				<< "Form D:\n" << D << '\n';
-
-			line();
-
-		A.signForm(D);
-		std::cout << "Form D:\n" << D << '\n';
-
-			line();
-
-		
-		A.signForm(D);
-		std::cout << "Form D:\n" << D << '\n';
+		Bureaucrat	A;
+		Bureaucrat	B("Gilbert", 12);
+		std::cout << "A:\n" << A << '\n';
+		std::cout << "B:\n" << B << '\n';
+		B = A;
+		std::cout << "B:\n" << B << '\n';
+		Bureaucrat	C(B);
+		std::cout << "C:\n" << C << '\n';
 	}
 	catch (std::exception &exception)
 	{
 		std::cerr << exception.what() << std::endl;
 	}
-			line();
+		line();
+
+	try
+	{
+		Bureaucrat	A("Yannis", 53);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+	
+	try
+	{
+		Bureaucrat	A("Roger", 151);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+	
+	try
+	{
+		Bureaucrat	A("Cliford", -1);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Bureaucrat	A("Baptiste", 0);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+		line();
+		
+	try
+	{
+		Form	A;
+		Form	B("Shopping list", true, 5, 87);
+		std::cout << "A:\n" << A << '\n';
+		std::cout << "B:\n" << B << '\n';
+		A = B;
+		std::cout << "A:\n" << A << '\n';
+		Form	C(B);
+		std::cout << "C:\n" << C << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form	A("Shopping list", true, -1, 53);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form	A("Shopping list", true, 0, 53);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form	A("Shopping list", true, 1, -1);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form	A("Shopping list", true, 1, 0);
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form	A;
+		std::cout << "A:\n" << A << '\n';
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form		A("Shopping list", false, 150, 150);
+		Bureaucrat	B("Michel", 150);
+		std::cout << "A:\n" << A << '\n'
+				<< "B:\n" << B << '\n';
+		std::cout << "..........Signing A.........." << '\n';
+		B.signForm(A);
+		std::cout << "A:\n" << A << '\n';
+
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form		A("Shopping list", true, 150, 150);
+		Bureaucrat	B("Michel", 1);
+		std::cout << "A:\n" << A << '\n'
+				<< "B:\n" << B << '\n';
+		std::cout << "..........Signing A.........." << '\n';
+		B.signForm(A);
+		std::cout << "A:\n" << A << '\n';
+
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
+
+		line();
+
+	try
+	{
+		Form		A("Shopping list", false, 1, 1);
+		Bureaucrat	B("Michel", 150);
+		std::cout << "A:\n" << A << '\n'
+				<< "B:\n" << B << '\n';
+		std::cout << "..........Signing A.........." << '\n';
+		B.signForm(A);
+		std::cout << "A:\n" << A << '\n';
+
+	}
+	catch (std::exception &exception)
+	{
+		std::cerr << exception.what() << std::endl;
+	}
 	return (0);
 }

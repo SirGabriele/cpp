@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:21:19 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/17 17:19:04 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:45:30 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@ class	Bureaucrat
 {
 	public:
 		Bureaucrat(void);
-		Bureaucrat(std::string name);
-		Bureaucrat(int grade);
 		Bureaucrat(std::string name, int grade);
 		Bureaucrat(const Bureaucrat &src);
 		~Bureaucrat(void);

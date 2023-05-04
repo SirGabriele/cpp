@@ -6,12 +6,13 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 14:55:08 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/01 14:56:29 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/02 14:59:04 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 #ifndef B_HPP
+# define B_HPP
 
 class	B: public Base
 {

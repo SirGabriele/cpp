@@ -19,6 +19,8 @@
 
 int	main(void)
 {
+	std::srand(std::time(NULL));
+
 	Bureaucrat	jerome("Jérome", 1);
 	Intern		flunky;
 	AForm		*form = NULL;

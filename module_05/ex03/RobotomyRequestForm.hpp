@@ -28,7 +28,6 @@ class	RobotomyRequestForm : public AForm
 
 		RobotomyRequestForm	&operator=(const RobotomyRequestForm &src);
 
-		virtual void	beSigned(Bureaucrat &employee);
 		virtual void	execute(const Bureaucrat &executor) const;
 	
 	private:

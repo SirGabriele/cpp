@@ -26,7 +26,6 @@ class	PresidentialPardonForm : public AForm
 
 		PresidentialPardonForm	&operator=(const PresidentialPardonForm &src);
 
-		virtual void	beSigned(Bureaucrat &employee);
 		virtual void	execute(const Bureaucrat &executor) const;
 		
 	private:

@@ -42,17 +42,15 @@ RobotomyRequestForm	&RobotomyRequestForm::operator=(const RobotomyRequestForm &s
 	return (*this);
 }
 
-void	RobotomyRequestForm::beSigned(Bureaucrat &employee)
-{
-	if (employee.getGrade() > (unsigned int)this->_minGradeToSign)
-		throw GradeTooLowException("This bureaucrat could not sign the form.");
-	else
-		this->_isSigned = true;
-}
-
 void	RobotomyRequestForm::execute(const Bureaucrat &executor) const
 {
-	std::srand(std::time(NULL));
+	if (this->_isSigned == false)
+	{
+		std::cout << "This form has not been signed yet. Therefore it can not be executed" << std::endl;
+		return ;
+	}
+	else if (executor.getGrade() > (unsigned int)this->_minGradeToExecute)
+		throw GradeTooLowException("This bureaucrat could not execute the form.");
 
 	int	randomValue = std::rand();
 

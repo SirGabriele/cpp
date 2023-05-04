@@ -75,6 +75,14 @@ int AForm::getMinGradeToExecute(void) const
 	return (this->_minGradeToExecute);
 }
 
+void	AForm::beSigned(Bureaucrat &employee)
+{
+	if (employee.getGrade() > (unsigned int)this->_minGradeToSign)
+		throw GradeTooLowException("This bureaucrat could not sign the form.");
+	else
+		this->_isSigned = true;
+}
+
 AForm::GradeTooHighException::GradeTooHighException(void) throw(): _errorMsg("Grade is too high.")
 {
 

@@ -43,16 +43,16 @@ ShrubberyCreationForm	&ShrubberyCreationForm::operator=(const ShrubberyCreationF
 	return (*this);
 }
 
-void	ShrubberyCreationForm::beSigned(Bureaucrat &employee)
-{
-	if (employee.getGrade() > (unsigned int)this->_minGradeToSign)
-		throw GradeTooLowException("This bureaucrat could not sign the form.");
-	else
-		this->_isSigned = true;
-}
-
 void	ShrubberyCreationForm::execute(const Bureaucrat &executor) const
 {
+	if (this->_isSigned == false)
+	{
+		std::cout << "This form has not been signed yet. Therefore it can not be executed" << std::endl;
+		return ;
+	}
+	else if (executor.getGrade() > (unsigned int)this->_minGradeToExecute)
+		throw GradeTooLowException("This bureaucrat could not execute the form.");
+
 	std::ofstream			outfile;
 	std::string				fileName;
 	fileName = this->_target + "_shrubbery";

@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/18 16:42:06 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/24 09:04:45 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:46:47 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,13 @@ static void	pres(void)
 	{
 		Bureaucrat	signOnTheDot("signOnTheDot", 25);
 		Bureaucrat	executeOnTheDot("executeOnTheDot", 5);
+		Bureaucrat	noob("noob", 150);
 
 		std::cout << *A << std::endl;
 		signOnTheDot.executeForm(*A);		/*	Executing a non signed form	*/
-		signOnTheDot.signForm(*A);			/*	Signing form	*/
+//		signOnTheDot.signForm(*A);			/*	Signing form	*/
+//		noob.executeForm(*A);				/*	Noob can't execute	*/
+		A->execute(noob);					/*	Noob can't execute	*/
 		executeOnTheDot.executeForm(*A);	/*	Executing a signed form	*/
 		std::cout << *A << std::endl;
 	}
@@ -53,10 +56,13 @@ static void	robot(void)
 	{
 		Bureaucrat	signOnTheDot("signOnTheDot", 72);
 		Bureaucrat	executeOnTheDot("executeOnTheDot", 45);
+		Bureaucrat	noob("noob", 150);
 
 		std::cout << *A << std::endl;
 		signOnTheDot.executeForm(*A);		/*	Executing a non signed form	*/
 		signOnTheDot.signForm(*A);			/*	Signing form	*/
+//		noob.executeForm(*A);				/*	Noob can't execute	*/
+//		A->execute(noob);					/*	Noob can't execute	*/
 		executeOnTheDot.executeForm(*A);	/*	Executing a signed form	*/
 		std::cout << *A << std::endl;
 	}
@@ -76,10 +82,14 @@ static void	shru(void)
 	{
 		Bureaucrat	signOnTheDot("signOnTheDot", 145);
 		Bureaucrat	executeOnTheDot("executeOnTheDot", 137);
+		Bureaucrat	noob("noob", 150);
+
 
 		std::cout << *A << '\n';;
 		signOnTheDot.executeForm(*A);		/*	Executing a non signed form	*/
 		signOnTheDot.signForm(*A);			/*	Signing form	*/
+//		noob.executeForm(*A);				/*	Noob can't execute	*/
+//		A->execute(noob);					/*	Noob can't execute	*/
 		executeOnTheDot.executeForm(*A);	/*	Executing a signed form	*/
 		std::cout << *A << std::endl;
 	}
@@ -92,6 +102,8 @@ static void	shru(void)
 
 int	main(void)
 {
+	std::srand(std::time(NULL));
+
 	shru();
 		line();
 	robot();

@@ -27,7 +27,6 @@ class	ShrubberyCreationForm : public AForm
 
 		ShrubberyCreationForm	&operator=(const ShrubberyCreationForm &src);
 
-		virtual void	beSigned(Bureaucrat &employee);
 		virtual void	execute(const Bureaucrat &executor) const;
 	
 	private:

@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 14:21:25 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/17 18:04:34 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/02 15:45:27 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,34 +17,9 @@ Bureaucrat::Bureaucrat(void): _name("Default"), _grade(75)
 
 }
 
-Bureaucrat::Bureaucrat(std::string name): _name(name), _grade(75)
-{
-
-}
-
-Bureaucrat::Bureaucrat(int grade): _name("Default"), _grade(grade)
-{
-	if (grade < 0)
-	{
-		std::cerr << "Please provide a positive value for the grade attribute" << std::endl;
-		throw GradeTooLowException("Could not create this Bureaucrat.");
-	}
-	else if (grade == 0)
-		throw GradeTooHighException("Could not create this Bureaucrat.");
-	else if (grade > 150)
-		throw GradeTooLowException("Could not create this Bureaucrat.");
-	else
-		_grade = grade;
-}
-
 Bureaucrat::Bureaucrat(std::string name, int grade): _name(name)
 {
-	if (grade < 0)
-	{
-		std::cerr << "Please provide a positive value for the grade attribute" << std::endl;
-		throw GradeTooLowException("Could not create this Bureaucrat.");
-	}
-	else if (grade == 0)
+	if (grade <= 0)
 		throw GradeTooHighException("Could not create this Bureaucrat.");
 	else if (grade > 150)
 		throw GradeTooLowException("Could not create this Bureaucrat.");
@@ -87,7 +62,6 @@ void	Bureaucrat::promote(void)
 		this->_grade--;
 	else
 		throw GradeTooHighException("Could not promote this Bureaucrat.");
-		
 }
 
 void	Bureaucrat::demote(void)
