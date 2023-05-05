@@ -166,7 +166,9 @@ void	ScalarConverter::_convertToInt(std::string input)
 	long	conv = strtol(input.c_str(), NULL, 10);
 
 	std::cout << "int: ";
-	if (conv == std::numeric_limits<long>::max() || conv == std::numeric_limits<long>::min())
+	if (ScalarConverter::_type == "char")
+		std::cout << static_cast<int>(input.at(0)) << std::endl;
+	else if (conv == std::numeric_limits<long>::max() || conv == std::numeric_limits<long>::min())
 		std::cout << "Non displayable" << std::endl;
 	else if (conv > 2147483647 || conv < -2147483648)
 		std::cout << "conversion is impossible" << std::endl;
@@ -179,7 +181,9 @@ void	ScalarConverter::_convertToFloat(std::string input)
 	float	conv = strtof(input.c_str(), NULL);
 
 	std::cout << "float: ";
-	if (conv == std::numeric_limits<float>::max() || conv == std::numeric_limits<float>::min())
+	if (ScalarConverter::_type == "char")
+		std::cout << std::fixed << std::setprecision(1) << static_cast<int>(input.at(0)) << ".0f" << std::endl;
+	else if (conv == std::numeric_limits<float>::max() || conv == std::numeric_limits<float>::min())
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << std::fixed << std::setprecision(1) << conv << 'f' << std::endl;
@@ -190,7 +194,10 @@ void	ScalarConverter::_convertToDouble(std::string input)
 	double	conv = strtod(input.c_str(), NULL);
 
 	std::cout << "double: ";
-	if (conv == std::numeric_limits<double>::max() || conv == std::numeric_limits<double>::min())
+	if (ScalarConverter::_type == "char")
+		std::cout << std::fixed << std::setprecision(1) << static_cast<int>(input.at(0)) << ".0" << std::endl;
+	else if (conv == std::numeric_limits<double>::max()
+		|| conv == std::numeric_limits<double>::min())
 		std::cout << "Non displayable" << std::endl;
 	else
 		std::cout << std::fixed << std::setprecision(1) << conv << std::endl;
