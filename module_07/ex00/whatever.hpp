@@ -32,9 +32,9 @@ void	swap(A& x, A& y)
 one. If the two of them are equal, then it returns the second one.
 */
 template<typename A>
-A	min(A& x, A& y)
+A	&min(A& x, A& y)
 {
-	return (x <= y ? x : y);
+	return (x < y ? x : y);
 }
 
 /*
@@ -42,9 +42,9 @@ A	min(A& x, A& y)
 If the two of them are equal, then it returns the second one.
 */
 template<typename A>
-A	max(A&x, A&y)
+A	&max(A&x, A&y)
 {
-	return (x >= y ? x : y);
+	return (x > y ? x : y);
 }
 
 #endif /*WHATEVER_HPP*/

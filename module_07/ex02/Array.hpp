@@ -11,8 +11,8 @@
 /* ************************************************************************** */
 
 #pragma once
-#ifndef ARRAY_TPP
-# define ARRAY_TPP
+#ifndef ARRAY_HPP
+# define ARRAY_HPP
 
 # include <string>
 # include <exception>
@@ -29,7 +29,7 @@ class	Array
 		Array	&operator=(const Array &src);
 		T		&operator[](int index);
 
-//		int	size(void) const;
+		int	size(void) const;
 
 	private:
 		T	*_array;
@@ -40,7 +40,7 @@ class	Array
 • Construction with no parameter: Creates an empty array.
 */
 template<typename T>
-Array<T>::Array(void): _array(new T[0])
+Array<T>::Array(void): _array(new T[0]), _length(0)
 {
 
 }
@@ -50,7 +50,7 @@ Array<T>::Array(void): _array(new T[0])
 initialized by default.
 */
 template<typename T>
-Array<T>::Array(unsigned int n): _array(new T[n])
+Array<T>::Array(unsigned int n): _array(new T[n]), _length(n)
 {
 
 }
@@ -66,7 +66,7 @@ Array<T>::~Array(void)
 original array or its copy after copying musn’t affect the other array.
 */
 template<typename T>
-Array<T>::Array(const Array &src)
+Array<T>::Array(const Array &src): _array(new T[src._length])
 {
 	*this = src;
 }
@@ -76,6 +76,7 @@ Array<T>	&Array<T>::operator=(const Array &src)
 {
 	if (this != &src)
 	{
+		this->_length = src._length;
 		delete [] this->_array;
 		this->_array = new T[src._length];
 		for (int i = 0; i < src._length; i++)
@@ -92,4 +93,10 @@ T	&Array<T>::operator[](int index)
 	return (this->_array[index]);
 }
 
-#endif /*ARRAY_TPP*/
+template<typename T>
+int	Array<T>::size(void) const
+{
+	return (this->_length);
+}
+
+#endif /*ARRAY_HPP*/

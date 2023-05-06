@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 12:21:46 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/05 13:59:34 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:18:59 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,74 @@
 #include <string>
 #include <cctype>
 
-void	toUpper(char& c)
+void	toUpper(std::string &str)
 {
-	if (c >= 'a' && c <= 'z')
-		c -= 32;
+	for (std::string::size_type i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) >= 'a' && str.at(i) <= 'z')
+			str.at(i) -= 32;
+	}
 }
 
-void	toLower(char& c)
+void	toLower(std::string &str)
 {
-	if (c >= 'A' && c <= 'Z')
-	c += 32;
+	for (std::string::size_type i = 0; i < str.length(); i++)
+	{
+		if (str.at(i) >= 'A' && str.at(i) <= 'Z')
+			str.at(i) += 32;
+	}
 }
 
 int	main(void)
 {
-	std::string	fullMin = "hello I'm a string only composef of lowercase letters";
-	std::string	fullCap = "HELLO I'M A STRING ONLY COMPOSED OF CAPITAL LETTERS";
-	std::string	mixed = "hElLo I'm A sTrInG cOmPoSeD oF cApItAl LeTtErS aNd LoWeRcAsE lEtTeRs";
+	std::string	fullMin[] = {"hello", " i'm", " a", " string", " only", " composed", " of", " lowercase", " letters"};
+	std::string	fullCap[] = {"HELLO", " I'M", " A", " STRING", " ONLY", " COMPOSED", " OF", " CAPITAL", " LETTERS"};
+	std::string	mixed[] = {"hElLo", " I'm", " A", " sTrInG", " cOmPoSeD", " oF", " cApItAl", " LeTtErS", " aNd", " LoWeRcAsE", " lEtTeRs"};
 
-	std::cout << fullMin << std::endl;
-	std::cout << fullCap << std::endl;
-	std::cout << mixed << '\n' << std::endl;
+	int sizeFullMin = sizeof(fullMin) / sizeof(std::string);
+	int	sizeFullCap = sizeof(fullCap) / sizeof(std::string);
+	int	sizeMixed = sizeof(mixed) / sizeof(std::string);
 
-	iter(&fullMin, fullMin.length(), toUpper);
-	iter(&fullCap, fullCap.length(), toUpper);
-	iter(&mixed, mixed.length(), toUpper);
+	std::cout << "Original arrays:\n";
+	for (int i = 0; i < sizeFullMin; i++)
+		std::cout << fullMin[i];
+	std::cout << '\n';
+	for (int i = 0; i < sizeFullCap; i++)
+		std::cout << fullCap[i];
+	std::cout << '\n';
+	for (int i = 0; i < sizeMixed; i++)
+		std::cout << mixed[i];
+	std::cout << '\n' << std::endl;;
 
-	std::cout << fullMin << std::endl;
-	std::cout << fullCap << std::endl;
-	std::cout << mixed << '\n' << std::endl;
+	iter(fullMin, sizeFullMin, toLower);
+	iter(fullCap, sizeFullCap, toLower);
+	iter(mixed, sizeMixed, toLower);
 
-	iter(&fullMin, fullMin.length(), toLower);
-	iter(&fullCap, fullCap.length(), toLower);
-	iter(&mixed, mixed.length(), toLower);
+	std::cout << "Modified arrays:\n";
+	for (int i = 0; i < sizeFullMin; i++)
+		std::cout << fullMin[i];
+	std::cout << '\n';
+	for (int i = 0; i < sizeFullCap; i++)
+		std::cout << fullCap[i];
+	std::cout << '\n';
+	for (int i = 0; i < sizeMixed; i++)
+		std::cout << mixed[i];
+	std::cout << '\n' << std::endl;;
 
-	std::cout << fullMin << std::endl;
-	std::cout << fullCap << std::endl;
-	std::cout << mixed << std::endl;
+	std::cout << "Re-modified arrays:\n";
+	iter(fullMin, sizeFullMin, toUpper);
+	iter(fullCap, sizeFullCap, toUpper);
+	iter(mixed, sizeMixed, toUpper);
+
+	for (int i = 0; i < sizeFullMin; i++)
+		std::cout << fullMin[i];
+	std::cout << '\n';
+	for (int i = 0; i < sizeFullCap; i++)
+		std::cout << fullCap[i];
+	std::cout << '\n';
+	for (int i = 0; i < sizeMixed; i++)
+		std::cout << mixed[i];
+	std::cout << std::endl;
 
 	return (0);
 }
