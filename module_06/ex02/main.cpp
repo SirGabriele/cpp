@@ -112,6 +112,7 @@ int	main(void)
 		p = generate();
 		identify(*p);
 		std::cout << "------------------------------------------------" << std::endl;
+		delete p;
 	}
 	return (0);
 }
