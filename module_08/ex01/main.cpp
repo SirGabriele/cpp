@@ -6,7 +6,7 @@
 /*   By: kbrousse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 16:54:51 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/12 18:09:13 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/15 14:16:44 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 
 /*
 %s/vector/list/g
+%s/list/deque/g
 */
 
 int length = 10; //tester avec 0 1 et 2
@@ -50,7 +51,6 @@ int	main(void)
 	try
 	{
 		sp.addNumbers(origin.begin(), origin.end());
-		sp.addNumbers(origin.begin(), origin.end());
 		sp.addNumbers(origin.begin(), origin.end());//will throw an exception
 	}
 	catch(std::exception &exception)
@@ -76,7 +76,7 @@ int	main(void)
 	sp.shortestSpan();
 
 		{
-			std::cout << "\n\n------------------------------------------------------\n";
+			std::cout << "\n------------------------------------------------------\n";
 			std::cout << "Testing if the assignment operator works\n";
 			Span	sp2(5);
 			
@@ -92,56 +92,38 @@ int	main(void)
 			sp2.printMultiset();
 			try
 			{
-				sp2.addNumber(10);
-				sp2.addNumber(20);
-				sp2.addNumber(30);
-				sp2.addNumber(40);
-				sp2.addNumber(50);
+				sp2.addNumber(10);//will throw an exception
 			}
 			catch (std::exception &exception)
 			{
 				std::cerr << exception.what() << std::endl;
 			}
+			std::cout << '\n';
+			sp2.longestSpan();
+			std::cout << '\n';
+			sp2.shortestSpan();
 		}
 
-/*	std::cout << "\n\n-----------------------------sp2 = sp-----------------------------\n\n";
+		{
+			std::cout << "\n------------------------------------------------------\n";
+			std::cout << "Testing if the copy constructor works\n";
+			Span	sp3(sp);
+			
+			std::cout << "...Filling sp3 to its max capacity...\n";
+			sp3.printMultiset();
+			try
+			{
+				sp3.addNumber(10);//will throw an exception
+			}
+			catch (std::exception &exception)
+			{
+				std::cerr << exception.what() << std::endl;
+			}
+			std::cout << '\n';
+			sp3.longestSpan();
+			std::cout << '\n';
+			sp3.shortestSpan();
+		}
 
-	Span	sp2 = sp;
-
-	std::cout << "...Trying to add one value to sp2...\n";
-	try
-	{
-		sp2.addNumber(1);//will throw an exception
-	}
-	catch(std::exception &exception)
-	{
-		std::cerr << exception.what() << std::endl;
-	}
-	std::cout << "\nContent of Span2:\n";
-	sp2.printMultiset();
-	std::cout << '\n';
-	sp2.longestSpan();
-	std::cout << '\n';
-	sp2.shortestSpan();
-
-	std::cout << "\n\n-----------------------------sp3(sp2)-----------------------------\n\n";
-
-	Span	sp3(sp2);
-
-	std::cout << "...Trying to add one value to sp3...\n";
-	try
-	{
-		sp3.addNumber(1);//will throw an exception
-	}
-	catch(std::exception &exception)
-	{
-		std::cerr << exception.what() << std::endl;
-	}
-	std::cout << "\nContent of Span3:\n";
-	sp3.printMultiset();
-	std::cout << '\n';
-	sp3.longestSpan();
-	std::cout << '\n';
-	sp3.shortestSpan();*/
 	return (0);
 }
