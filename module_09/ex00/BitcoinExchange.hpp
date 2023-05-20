@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:28:51 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/18 17:48:36 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:21:26 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <fstream>
 # include <iostream>
 # include <string>
+# include <cstdlib>	/*	atoi	*/
+# include <ctime>	/*	std::time	*/
 
 class	BitcoinExchange
 {
@@ -34,7 +36,8 @@ class	BitcoinExchange
 		static void	formatError(unsigned int i, const std::string &line);
 		static bool	analyseLine(const std::string &line);
 		static bool	analyseDate(const std::string &date);
-//		static void	analyseExchangeRate();
+		static bool	isDateValid(const std::string &date, std::string::size_type firstDashIndex, std::string::size_type secondDashIndex);
+		static bool	analyseExchangeRate(const std::string &exchangeRate);
 
 		static std::ifstream	_infile;
 

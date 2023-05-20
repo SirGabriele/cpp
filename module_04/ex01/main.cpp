@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angouleme.fr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/11 19:30:59 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/04/13 17:38:17 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/20 16:01:24 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ int	main(void)
 		for (int i = 0; i < 100; i++)
 			std::cout << i << " : " << B->getBrain().getIdea(i) << '\n';
 		delete B;
+	}
+	Dog	tmp;
+	{
+		Dog basic = tmp;
 	}
 	return (0);
 }
