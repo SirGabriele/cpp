@@ -17,14 +17,15 @@
 # include <iostream>
 # include <string>
 # include <cstdlib>	/*	atoi	*/
-# include <ctime>	/*	std::time	*/
+# include <map>
 
 class	BitcoinExchange
 {
 	public:
-		static void	openDBFile(void);
-		static void	closeDBFile(void);
-		static void	analyseDB(void);
+		static void	openFile(const std::string &name);
+		static void	closeFile(const std::string &name);
+		static bool	analyseDB(void);
+		static void	analyseInput(void);
 
 	private:
 		BitcoinExchange(void);
@@ -33,13 +34,18 @@ class	BitcoinExchange
 
 		BitcoinExchange	&operator=(const BitcoinExchange &src);
 
-		static void	formatError(unsigned int i, const std::string &line);
-		static bool	analyseLine(const std::string &line);
+		static void	DBFormatError(unsigned int i, const std::string &line);
+		static void	InputFormatError(unsigned int i, const std::string &line);
+
+		static bool	analyseLine(const std::string &line, const std::string &separator);
 		static bool	analyseDate(const std::string &date);
 		static bool	isDateValid(const std::string &date, std::string::size_type firstDashIndex, std::string::size_type secondDashIndex);
-		static bool	analyseExchangeRate(const std::string &exchangeRate);
+		static bool	analyseValue(const std::string &valueStr);
 
-		static std::ifstream	_infile;
+		static	std::ifstream					_infile;
+		static	std::map<std::string, float>	_map;
+		static	std::string						_date;
+		static	float							_value;
 
 				/*	START OF EXCEPTIONS	*/
 		class	InvalidDB: public std::exception

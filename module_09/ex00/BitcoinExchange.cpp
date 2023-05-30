@@ -6,13 +6,16 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:37 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/20 18:13:39 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/30 16:20:36 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-std::ifstream	BitcoinExchange::_infile;
+std::ifstream					BitcoinExchange::_infile;
+std::map<std::string, float>	BitcoinExchange::_map;
+std::string						BitcoinExchange::_date;
+float							BitcoinExchange::_value;
 
 BitcoinExchange::BitcoinExchange(void)
 {
@@ -52,28 +55,35 @@ const char	*BitcoinExchange::InvalidDB::what(void) const throw()
 }
 		/*	END OF EXCEPTIONS	*/
 
-void	BitcoinExchange::openDBFile(void)
+void	BitcoinExchange::openFile(const std::string &name)
 {
-	BitcoinExchange::_infile.open("data.csv");
+	BitcoinExchange::_infile.open(name.c_str());
 	if (BitcoinExchange::_infile.is_open() == false)
-		throw InvalidDB("Failed to open <data.csv>");
+		throw InvalidDB("Failed to open " + name);
 }
 
-void	BitcoinExchange::closeDBFile(void)
+void	BitcoinExchange::closeFile(const std::string &name)
 {
 	BitcoinExchange::_infile.close();
 	if (BitcoinExchange::_infile.rdstate() == std::ios_base::failbit)
-		throw InvalidDB("Failed to close <data.csv>");
+		throw InvalidDB("Failed to close " + name);
 }
 
-void	BitcoinExchange::formatError(unsigned int i, const std::string &line)
+void	BitcoinExchange::DBFormatError(unsigned int i, const std::string &line)
 {
-	std::cerr << "Error: line " << i
+	std::cerr << "Error: data.csv | line " << i
 			<< " does not respect the expected format <xxxx-xx-xx,<int, float>>. Found <"
-			<< line << ">... Skipping it." << std::endl;
+			<< line << "> ... Skipping it." << std::endl;
 }
 
-void	BitcoinExchange::analyseDB(void)
+void	BitcoinExchange::InputFormatError(unsigned int i, const std::string &line)
+{
+	std::cerr << "Error: provided file | line " << i
+			<< " does not respect the expected format <xxxx-xx-xx,<int, float>>. Found <"
+			<< line << "> ... Skipping it." << std::endl;
+}
+
+bool	BitcoinExchange::analyseDB(void)
 {
 	std::string		line;
 	unsigned int	i = 2;
@@ -85,32 +95,84 @@ void	BitcoinExchange::analyseDB(void)
 	{
 		if (line.empty() == true)
 			std::cerr << "Error: line " << i << " is empty... Skipping it.\n";
-		else if (analyseLine(line) != true)
-			BitcoinExchange::formatError(i, line);
+		else if (analyseLine(line, ",") != true)
+			BitcoinExchange::DBFormatError(i, line);
+		else if (BitcoinExchange::_value < 0)
+		{
+			std::cerr << "Value for exchange rate must be positive" << std::endl;
+			BitcoinExchange::InputFormatError(i, line);
+		}
 		else
 		{
-			//add to map
+			try
+			{
+				std::pair<std::map<std::string, float>::iterator, bool> success =
+					BitcoinExchange::_map.insert(std::pair<std::string, float>
+					(BitcoinExchange::_date, BitcoinExchange::_value));
+				if (success.second == false)
+				{
+					std::cerr << "Insertion failed, key has already been declared previously"
+							<< std::endl;
+					return (false);
+				}
+			}
+			catch (std::exception &exception)
+			{
+				std::cerr << "Memory allocation failed" << std::endl;
+				return (false);
+			}
+		}
+		i++;
+	}
+	return (true);
+}
+
+void	BitcoinExchange::analyseInput(void)
+{
+	std::string		line;
+	unsigned int	i = 2;
+
+	std::getline(BitcoinExchange::_infile, line);
+	if (line != "date | value")
+		throw InvalidDB("Header is invalid. Expected <date | value> but found <" + line + ">.");
+	while (std::getline(BitcoinExchange::_infile, line))
+	{
+		if (line.empty() == true)
+			std::cerr << "Error: line " << i << " is empty... Skipping it.\n";
+		else if (analyseLine(line, " | ") != true)
+			BitcoinExchange::InputFormatError(i, line);
+		else if (BitcoinExchange::_value > 1000 || BitcoinExchange::_value < 0)
+			BitcoinExchange::InputFormatError(i, line);
+		else
+		{
+			std::map<std::string, float>::iterator it = BitcoinExchange::_map.lower_bound(BitcoinExchange::_date);
+			if (it->first != BitcoinExchange::_date && it != BitcoinExchange::_map.begin())
+				--it;
+
+			double	product = BitcoinExchange::_value * it->second;
+
+			std::cout << BitcoinExchange::_date << " => " << it->second << " = " << product << std::endl;
 		}
 		i++;
 	}
 }
 
-bool	BitcoinExchange::analyseLine(const std::string &line)
+bool	BitcoinExchange::analyseLine(const std::string &line, const std::string &separator)
 {
-	std::string::size_type	commaIndex = line.find_first_of(',', 0);
+	std::string::size_type	separatorIndex = line.find_first_of(separator, 0);
 	std::string::size_type	firstDashIndex = line.find_first_of('-', 0);
 	std::string::size_type	secondDashIndex = line.find_first_of('-', firstDashIndex + 1);
 
-	if (commaIndex == std::string::npos || commaIndex != 10
+	if (separatorIndex == std::string::npos || separatorIndex != 10
 		|| firstDashIndex == std::string::npos
 		|| secondDashIndex == std::string::npos
 		|| firstDashIndex != 4 || secondDashIndex != 7)
 		return (false);
-	if (analyseDate(line.substr(0, commaIndex)) != true)
+	if (analyseDate(line.substr(0, separatorIndex)) != true)
 		return (false);
-	if (isDateValid(line.substr(0, commaIndex), firstDashIndex, secondDashIndex) != true)
+	if (isDateValid(line.substr(0, separatorIndex), firstDashIndex, secondDashIndex) != true)
 		return (false);
-	if (analyseExchangeRate(line.substr(commaIndex + 1, line.length() - commaIndex)) != true)
+	if (analyseValue(line.substr(separatorIndex + separator.length(), line.length() - separatorIndex)) != true)
 		return (false);
 	return (true);
 }
@@ -139,64 +201,47 @@ bool	BitcoinExchange::isDateValid(const std::string &date, std::string::size_typ
 	int			monthInt = atoi(monthStr.c_str());
 	int			dayInt = atoi(dayStr.c_str());
 
-	bool		isLeapYear = false;
+	bool		isLeapYear = ((yearInt % 4 == 0) && (yearInt % 100 != 0)) || (yearInt % 400 == 0);
 
-	std::time_t	now = std::time(NULL);
-	std::tm		*currentTime = std::localtime(&now);
-
-	if (monthInt > 12 || dayInt > 31)//month or day is totally invalid
-	{
-		std::cout << "Max month is 12 and max day number is 31" << std::endl;
+	if (monthInt > 12 || dayInt > 31)//month or day exceeds max possible values
 		return (false);
-	}
 	else if (dayInt > daysInMonths[monthInt - 1])//day exceeds the months days
-	{
-		std::cout << months[monthInt - 1] << " has " << daysInMonths[monthInt - 1] << " days at max" << std::endl;
 		return (false);
-	}
 	else if (yearInt <= 2009 && monthInt <= 1 && dayInt < 3)//date is prior to Bitcoin creation
 	{
 		std::cerr << "Bitcoin appeared on January 3rd 2009. So this date is invalid" << std::endl;
 		return (false);
 	}
-	else if (yearInt >= 1900 + currentTime->tm_year
-		&& monthInt >= currentTime->tm_mon + 1
-		&& dayInt > currentTime->tm_mday)//date is in the future
-	{
-		std::cerr << "This date is in the future" << std::endl;
-		return (false);
-	}
-	if (((yearInt % 4 == 0) && (yearInt % 100 != 0)) || (yearInt % 400 == 0))
-		isLeapYear = true;
 	if ((isLeapYear == false && monthInt == 2 && dayInt > 28)
 		|| (isLeapYear == true && monthInt == 2 && dayInt > 29))//Feb. 29th during a non leap year
-	{
-		std::cerr << "This year is not a leap year. Thus the day can not be " << dayInt << std::endl;
 		return (false);
-	}
+	BitcoinExchange::_date = date;
 	return (true);
 }
 
-bool	BitcoinExchange::analyseExchangeRate(const std::string &exchangeRate)
+bool	BitcoinExchange::analyseValue(const std::string &valueStr)
 {
+	bool	negSign = false;
 	bool	dotFound = false;
-	float	value = atof(exchangeRate.c_str());
+	float	value = atof(valueStr.c_str());
 
-	if (value > 1000)
+	for (std::string::size_type i = 0; i < valueStr.length(); i++)
 	{
-		std::cout << "Valid values for exchange rate are between 0 and 1000" << std::endl;
-		return (false);
-	}
-	for (std::string::size_type i = 0; i < exchangeRate.length(); i++)
-	{
-		if (exchangeRate[i] == '.')
+		if (valueStr[i] == '.')
 		{
 			if (dotFound == true)
 				return (false);
 			dotFound = true;
 		}
-		else if (std::isdigit(exchangeRate[i]) == 0)
+		else if (valueStr[i] == '-')
+		{
+			if (negSign == true)
+				return (false);
+			negSign = true;
+		}
+		else if (std::isdigit(valueStr[i]) == 0)
 			return (false);
 	}
+	BitcoinExchange::_value = value;
 	return (true);
 }
