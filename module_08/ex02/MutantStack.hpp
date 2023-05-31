@@ -68,5 +68,4 @@ typename std::stack<T>::container_type::iterator	MutantStack<T>::end(void)
 	return (this->c.end());
 }
 
-//std::stack<T>::container_type::iterator	&end(void);
 #endif /*MUTANTSTACK_HPP*/

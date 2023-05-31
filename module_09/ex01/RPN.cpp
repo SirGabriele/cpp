@@ -6,7 +6,7 @@
 /*   By: kbrousse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:27:10 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/31 16:15:32 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:32:13 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,11 @@ bool	RPN::isInputValid(const std::string &input)
 	{
 		if (i % 2 == 0)
 		{
-			//if (input[i] >= '0' && input[i] <= '9')
 			if (std::isdigit(input[i]) != 0)
 			{
 				nb++;
 				continue ;
 			}
-			//else if (input[i] == '+' || input[i] == '-' || input[i] == '*' || input[i] == '/')
 			else if (RPN::_operatorStr.find_first_of(input[i], 0) != std::string::npos)
 			{
 				op++;
