@@ -49,7 +49,7 @@ class	RPN
 
 		static int	getOperatorIndex(char);
 
-		static std::stack<int>				_myStack;
+		static std::stack<double>			_myStack;
 		static std::string					_operatorStr;
 		static char							_operatorArr[4];
 		static void							(*funcPtr[4])(void);

@@ -6,16 +6,16 @@
 /*   By: kbrousse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:27:10 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/31 16:32:13 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/31 17:01:58 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
-std::stack<int>	RPN::_myStack;
-std::string		RPN::_operatorStr = "+-*/";
-char			RPN::_operatorArr[4] = {'+', '-', '*', '/'};
-void			(*RPN::funcPtr[4])(void) = {&RPN::_add, &RPN::_sub, &RPN::_mul, &RPN::_div};
+std::stack<double>	RPN::_myStack;
+std::string			RPN::_operatorStr = "+-*/";
+char				RPN::_operatorArr[4] = {'+', '-', '*', '/'};
+void				(*RPN::funcPtr[4])(void) = {&RPN::_add, &RPN::_sub, &RPN::_mul, &RPN::_div};
 
 RPN::RPN(void)
 {
@@ -80,7 +80,7 @@ bool	RPN::calculate(char *input)
 		c = token[0];
 		if (token[1] != '\0')
 		{
-			std::cerr << "token.length() != 1" << std::endl;
+			std::cout << "token.length() != 1" << std::endl;
 			return (false);
 		}
 		else if (RPN::_operatorStr.find_first_of(c) != std::string::npos) //operator found;
@@ -131,36 +131,36 @@ void	RPN::displayResult(void)
 
 void	RPN::_add(void)
 {
-	int	a = RPN::_myStack.top();
+	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
-	int	b = RPN::_myStack.top();
+	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b + a);
 }
 
 void	RPN::_sub(void)
 {
-	int	a = RPN::_myStack.top();
+	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
-	int	b = RPN::_myStack.top();
+	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b - a);
 }
 
 void	RPN::_mul(void)
 {
-	int	a = RPN::_myStack.top();
+	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
-	int	b = RPN::_myStack.top();
+	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b * a);
 }
 
 void	RPN::_div(void)
 {
-	int	a = RPN::_myStack.top();
+	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
-	int	b = RPN::_myStack.top();
+	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b / a);
 }
@@ -169,7 +169,7 @@ int	RPN::getOperatorIndex(char c)
 {
 	if (RPN::_myStack.size() < 2)
 	{
-		std::cerr << "Can not do operation for stack only contains one element" << std::endl;
+		std::cout << "Can not do operation for stack only contains one element" << std::endl;
 		return (-1);
 	}
 	for (int i = 0; i < 4; i++)
@@ -177,6 +177,6 @@ int	RPN::getOperatorIndex(char c)
 		if (RPN::_operatorArr[i] == c)
 			return (i);
 	}
-	std::cerr << "Unknown operator found" << std::endl;
+	std::cout << "Unknown operator found" << std::endl;
 	return (-1);
 }
