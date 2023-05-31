@@ -6,14 +6,14 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:37 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/30 16:20:36 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/31 13:18:06 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
 std::ifstream					BitcoinExchange::_infile;
-std::map<std::string, float>	BitcoinExchange::_map;
+std::map<std::string, float>	BitcoinExchange::_myMap;
 std::string						BitcoinExchange::_date;
 float							BitcoinExchange::_value;
 
@@ -107,7 +107,7 @@ bool	BitcoinExchange::analyseDB(void)
 			try
 			{
 				std::pair<std::map<std::string, float>::iterator, bool> success =
-					BitcoinExchange::_map.insert(std::pair<std::string, float>
+					BitcoinExchange::_myMap.insert(std::pair<std::string, float>
 					(BitcoinExchange::_date, BitcoinExchange::_value));
 				if (success.second == false)
 				{
@@ -145,8 +145,8 @@ void	BitcoinExchange::analyseInput(void)
 			BitcoinExchange::InputFormatError(i, line);
 		else
 		{
-			std::map<std::string, float>::iterator it = BitcoinExchange::_map.lower_bound(BitcoinExchange::_date);
-			if (it->first != BitcoinExchange::_date && it != BitcoinExchange::_map.begin())
+			std::map<std::string, float>::iterator it = BitcoinExchange::_myMap.lower_bound(BitcoinExchange::_date);
+			if (it->first != BitcoinExchange::_date && it != BitcoinExchange::_myMap.begin())
 				--it;
 
 			double	product = BitcoinExchange::_value * it->second;

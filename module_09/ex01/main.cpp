@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 16:58:57 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/30 18:57:07 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/05/31 16:15:57 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,16 @@ int	main(int argc, char **argv)
 
 	std::string	input = argv[1];
 
-	if (RPN::isInputvalid(input) != true)
+	if (RPN::isInputValid(input) != true)
 	{
 		std::cerr << "Invalid format" << std::endl;
 		return (1);
 	}
-
-// a voir avec un espace en derniere position
-
-	/*char		*token = std::strtok(argv[1], WHITESPACES);
-	while (token != NULL)
+	else if (RPN::calculate(argv[1]) != true)
 	{
-		std::cout << token << '\n';
-		token = std::strtok(NULL, WHITESPACES);
-	}*/
-//	try
-//	{
-//
-//	}
-//	catch (std::exception &exception)
-//	{
-//		std::cerr << exception.what() << std::endl;
-//	}
+		std::cerr << "Something went wrong..." << std::endl;
+		return (1);
+	}
+	RPN::displayResult();
 	return (0);
 }

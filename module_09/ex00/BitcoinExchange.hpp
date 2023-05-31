@@ -43,7 +43,7 @@ class	BitcoinExchange
 		static bool	analyseValue(const std::string &valueStr);
 
 		static	std::ifstream					_infile;
-		static	std::map<std::string, float>	_map;
+		static	std::map<std::string, float>	_myMap;
 		static	std::string						_date;
 		static	float							_value;
 
