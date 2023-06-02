@@ -17,7 +17,8 @@
 
 # include <iostream>
 # include <string>
-# include <cstring>
+# include <cstring>	/*	std::strtok	*/
+# include <cstdlib>	/*	std::strtol()	*/
 # include <stack>
 
 enum	functionIndex
