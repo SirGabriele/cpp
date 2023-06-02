@@ -42,17 +42,17 @@ class	RPN
 
 		RPN	&operator=(const RPN &src);
 
-		static void	_add(void);
-		static void	_sub(void);
-		static void	_mul(void);
-		static void	_div(void);
+		static bool	_add(void);
+		static bool	_sub(void);
+		static bool	_mul(void);
+		static bool	_div(void);
 
 		static int	getOperatorIndex(char);
 
 		static std::stack<double>			_myStack;
 		static std::string					_operatorStr;
 		static char							_operatorArr[4];
-		static void							(*funcPtr[4])(void);
+		static bool							(*funcPtr[4])(void);
 };
 
 #endif /*RPN_HPP*/

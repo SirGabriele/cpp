@@ -6,7 +6,7 @@
 /*   By: kbrousse <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 17:27:10 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/31 17:01:58 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/06/02 14:31:07 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 std::stack<double>	RPN::_myStack;
 std::string			RPN::_operatorStr = "+-*/";
 char				RPN::_operatorArr[4] = {'+', '-', '*', '/'};
-void				(*RPN::funcPtr[4])(void) = {&RPN::_add, &RPN::_sub, &RPN::_mul, &RPN::_div};
+bool				(*RPN::funcPtr[4])(void) = {&RPN::_add, &RPN::_sub, &RPN::_mul, &RPN::_div};
 
 RPN::RPN(void)
 {
@@ -105,7 +105,8 @@ bool	RPN::calculate(char *input)
 				}
 				case DIV:
 				{
-					RPN::_div();
+					if (RPN::_div() == false)
+						return (false);
 					break ;
 				}
 				default :
@@ -129,40 +130,49 @@ void	RPN::displayResult(void)
 	std::cout << RPN::_myStack.top() << std::endl;
 }
 
-void	RPN::_add(void)
+bool	RPN::_add(void)
 {
 	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b + a);
+	return (true);
 }
 
-void	RPN::_sub(void)
+bool	RPN::_sub(void)
 {
 	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b - a);
+	return (true);
 }
 
-void	RPN::_mul(void)
+bool	RPN::_mul(void)
 {
 	double	a = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b * a);
+	return (true);
 }
 
-void	RPN::_div(void)
+bool	RPN::_div(void)
 {
 	double	a = RPN::_myStack.top();
+	if (a == 0)
+	{
+		std::cout << "Trying to divide by 0" << std::endl;
+		return (false);
+	}
 	RPN::_myStack.pop();
 	double	b = RPN::_myStack.top();
 	RPN::_myStack.pop();
 	RPN::_myStack.push(b / a);
+	return (true);
 }
 
 int	RPN::getOperatorIndex(char c)
