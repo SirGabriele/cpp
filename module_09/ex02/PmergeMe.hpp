@@ -17,6 +17,7 @@
 
 # define B_HI_RED "\e[1;91m"
 # define B_HI_GREEN "\e[1;92m"
+# define B_HI_YELLOW "\e[1;93m"
 # define RESET "\e[0m"
 
 # include <iostream>
@@ -32,10 +33,33 @@ class	PmergeMe
 {
 	public:
 		static bool	isSequenceValid(const std::string &);
+
 		static bool	fillVector(char *);
 		static bool	fillList(char *);
+
+		static void	createPairsVector(std::vector<int> &);
+
+		static std::vector<std::pair<int, int> >	sortPairsVector(std::vector<std::pair<int, int> > &);
+
+		static std::vector<std::pair<int, int> >	mergePairsVector(std::vector<std::pair<int, int> > &, std::vector<std::pair<int, int> > &);
+
+		static void	createMainSequenceVector(std::vector<std::pair<int, int> > &);
+
+		static void	insertPendingValuesVector(std::vector<std::pair<int, int> > &);
+
+		static int	binarySearchVector(std::vector<int> &, int, int, int);
+
 		static void	displayVector(void);
 		static void	displayList(void);
+
+
+//		static std::vector<int>						insertSortVector(std::vector<int> &);
+//		static std::vector<int>						&mergeInsertSort(std::vector<int> &);
+//		static std::vector<int>						&getVector(void);
+
+		static std::vector<std::pair<int, int> >	pairVector;
+		static std::vector<int>	myVector;
+		static std::list<int>	myList;
 
 	private:
 		PmergeMe(void);
@@ -44,8 +68,8 @@ class	PmergeMe
 
 		PmergeMe	&operator=(const PmergeMe &);
 
-		static std::vector<int>	_myVector;
-		static std::list<int>	_myList;
+		static std::pair<bool, int>	_oddValue;
+
 };
 
 #endif /*PMERGEME_HPP*/
