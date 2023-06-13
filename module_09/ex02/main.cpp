@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:11:38 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/06/09 17:40:49 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:19:43 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,10 @@ Merge-insertion sort performs the following steps, on an input X of n elements.
 5.Insert the remaining n/2 - 1 elements of S, one at a time, with a specially chosen insertion ordering described below. Use binary search in subsequences of S (as described below) to determine the position at which each element should be inserted.
 */
 
+/*
+ARG=$(seq 0 10000 | shuf | tr '\n' ' ') ; ./PmergeMe $ARG
+*/
+
 int	main(int argc, char **argv)
 {
 	if (argc == 1)
@@ -35,7 +39,6 @@ int	main(int argc, char **argv)
 	}
 	{
 		std::cout << B_HI_YELLOW << "---Vector---\n" << RESET;
-		
 		struct timeval	start;
 		gettimeofday(&start, NULL);
 
@@ -47,7 +50,7 @@ int	main(int argc, char **argv)
 				return (1);
 		}
 
-		std::cout << "Before:\t";
+		std::cout << B_HI_CYAN << "Before:\t" << RESET;
 		PmergeMe::displayVector();
 		std::cout << '\n';
 		
@@ -55,16 +58,16 @@ int	main(int argc, char **argv)
 		PmergeMe::pairVector = PmergeMe::sortPairsVector(PmergeMe::pairVector);
 		PmergeMe::createMainSequenceVector(PmergeMe::pairVector);
 		PmergeMe::insertPendingValuesVector(PmergeMe::pairVector);
-//		PmergeMe::myVector = PmergeMe::mergeInsertSort(PmergeMe::myVector);
 		
 		struct timeval	end;
 		gettimeofday(&end, NULL);
-		std::cout << "After:\t";
+		std::cout << B_HI_CYAN << "After:\t" << RESET;
 		PmergeMe::displayVector();
 		std::cout << "\n";
-		std::cout << "Time to process a range of " << PmergeMe::myVector.size() << " elements with std::vector : " << end.tv_usec - start.tv_usec << " µs\n\n";
+		std::cout << "Time to process a range of " << PmergeMe::myVector.size() << " elements with std::vector : " << (end.tv_sec * 1000000 + end.tv_usec) - (start.tv_sec * 1000000 + start.tv_usec) << " µs\n\n";
 	}
 	{
+		std::cout << B_HI_YELLOW << "---List---\n" << RESET;
 		struct timeval	start;
 		gettimeofday(&start, NULL);
 
@@ -76,17 +79,21 @@ int	main(int argc, char **argv)
 				return (1);
 		}
 
-		struct timeval	end;
-		gettimeofday(&end, NULL);
-		std::cout << B_HI_YELLOW << "---List---\n" << RESET;
-		std::cout << "Before:\t";
+		std::cout << B_HI_CYAN << "Before:\t" << RESET;
 		PmergeMe::displayList();
 		std::cout << '\n';
-		std::cout << "After:\t";
+
+		PmergeMe::createPairsList(PmergeMe::myList);
+		PmergeMe::pairList = PmergeMe::sortPairsList(PmergeMe::pairList);
+		PmergeMe::createMainSequenceList(PmergeMe::pairList);
+		PmergeMe::insertPendingValuesList(PmergeMe::pairList);
+
+		struct timeval	end;
+		gettimeofday(&end, NULL);
+		std::cout << B_HI_CYAN << "After:\t" << RESET;
 		PmergeMe::displayList();
 		std::cout << '\n';
 		std::cout << "Time to process a range of " << PmergeMe::myList.size() << " elements with std::list : " << end.tv_usec - start.tv_usec << " µs" << std::endl;
 	}
-
 	return (0);
 }

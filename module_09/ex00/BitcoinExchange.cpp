@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:37 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/05/31 13:18:06 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/06/13 12:03:11 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,13 +145,17 @@ void	BitcoinExchange::analyseInput(void)
 			BitcoinExchange::InputFormatError(i, line);
 		else
 		{
-			std::map<std::string, float>::iterator it = BitcoinExchange::_myMap.lower_bound(BitcoinExchange::_date);
-			if (it->first != BitcoinExchange::_date && it != BitcoinExchange::_myMap.begin())
+			std::map<std::string, float>::iterator it = BitcoinExchange::_myMap.upper_bound(BitcoinExchange::_date);
+			//if (it->first != BitcoinExchange::_date && it != BitcoinExchange::_myMap.begin())
+			if (it != BitcoinExchange::_myMap.begin() || it->first == BitcoinExchange::_date)
+			{
 				--it;
+				double	product = BitcoinExchange::_value * it->second;
 
-			double	product = BitcoinExchange::_value * it->second;
-
-			std::cout << BitcoinExchange::_date << " => " << it->second << " = " << product << std::endl;
+				std::cout << BitcoinExchange::_date << " => " << it->second << " = " << product << std::endl;
+			}
+			else
+				std::cout << "Error: provided file | line " << i << "'s date is prior to database's first date" << std::endl;
 		}
 		i++;
 	}
@@ -159,7 +163,7 @@ void	BitcoinExchange::analyseInput(void)
 
 bool	BitcoinExchange::analyseLine(const std::string &line, const std::string &separator)
 {
-	std::string::size_type	separatorIndex = line.find_first_of(separator, 0);
+	std::string::size_type	separatorIndex = line.find(separator, 0);
 	std::string::size_type	firstDashIndex = line.find_first_of('-', 0);
 	std::string::size_type	secondDashIndex = line.find_first_of('-', firstDashIndex + 1);
 

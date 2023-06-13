@@ -6,13 +6,14 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/02 14:22:25 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/06/09 17:40:44 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/06/13 11:19:37 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 std::vector<std::pair<int, int> >	PmergeMe::pairVector;
+std::list<std::pair<int, int> >		PmergeMe::pairList;
 std::vector<int>					PmergeMe::myVector;
 std::list<int>						PmergeMe::myList;
 std::pair<bool, int>				PmergeMe::_oddValue(false, 0);
@@ -109,11 +110,11 @@ std::vector<std::pair<int, int> >	PmergeMe::sortPairsVector(std::vector<std::pai
 	std::vector<std::pair<int, int> >	left;
 	std::vector<std::pair<int, int> >	right;
 
-	for (std::vector<int>::size_type i = 0; i < vector.size() / 2; i++)
+	for (std::vector<std::pair<int, int> >::size_type i = 0; i < vector.size() / 2; i++)
 	{
 		left.push_back(std::make_pair(vector[i].first, vector[i].second));
 	}
-	for (std::vector<int>::size_type i = vector.size() / 2; i < vector.size(); i++)
+	for (std::vector<std::pair<int, int> >::size_type i = vector.size() / 2; i < vector.size(); i++)
 	{
 		right.push_back(std::make_pair(vector[i].first, vector[i].second));
 	}
@@ -144,15 +145,10 @@ void	PmergeMe::createMainSequenceVector(std::vector<std::pair<int, int> > &pairs
 	for (std::vector<std::pair<int, int> >::size_type i = 1; i < pairs.size(); i++)
 	{
 		int	value = pairs[i].second;
-		int j = i - 1;
-
-		int							insertPos = binarySearchVector(PmergeMe::myVector, 0, j, value);
+		int							insertPos = binarySearchVector(PmergeMe::myVector, 0, PmergeMe::myVector.size() - 1, value);
 		std::vector<int>::iterator	it = PmergeMe::myVector.begin();
 
-		for (int i = 0; i < insertPos; i++)
-		{
-			it++;
-		}
+		std::advance(it, insertPos);
 		PmergeMe::myVector.insert(it, value);
 	}
 }
@@ -160,34 +156,24 @@ void	PmergeMe::createMainSequenceVector(std::vector<std::pair<int, int> > &pairs
 void	PmergeMe::insertPendingValuesVector(std::vector<std::pair<int, int> > &pairs)
 {
 	int							value;
-	int							j;
 	int							insertPos;
 	std::vector<int>::iterator	it;
 
 	for (std::vector<std::pair<int, int> >::size_type i = 0; i < pairs.size(); i++)
 	{
 		value = pairs[i].first;
-		j = PmergeMe::myVector.size() - 1;
 
-		insertPos = binarySearchVector(PmergeMe::myVector, 0, j, value);
+		insertPos = binarySearchVector(PmergeMe::myVector, 0, PmergeMe::myVector.size() - 1, value);
 		it = PmergeMe::myVector.begin();
-
-		for (int i = 0; i < insertPos; i++)
-		{
-			it++;
-		}
+		std::advance(it, insertPos);
 		PmergeMe::myVector.insert(it, value);
 	}
 	if (PmergeMe::_oddValue.first == true)
 	{
 		value = PmergeMe::_oddValue.second;
-		j = PmergeMe::myVector.size() - 1;
-		insertPos = binarySearchVector(PmergeMe::myVector, 0, j, value);
+		insertPos = binarySearchVector(PmergeMe::myVector, 0, PmergeMe::myVector.size() - 1, value);
 		it = PmergeMe::myVector.begin();
-		for (int i = 0; i < insertPos; i++)
-		{
-			it++;
-		}
+		std::advance(it, insertPos);
 		PmergeMe::myVector.insert(it, value);
 	}
 }
@@ -254,6 +240,122 @@ bool	PmergeMe::fillList(char *sequence)
 	}
 	delete [] temp;
 	return (true);
+}
+
+void	PmergeMe::createPairsList(std::list<int> &list)
+{
+	if (list.size() % 2 == 1)
+	{
+		PmergeMe::_oddValue = std::make_pair(true, list.back());
+		list.pop_back();
+	}
+	for (std::list<int>::iterator it = list.begin(); it != list.end(); std::advance(it, 2))
+	{
+		std::list<int>::iterator	next = it;
+		std::advance(next, 1);
+		PmergeMe::pairList.push_back(std::make_pair(*it, *next));
+	}
+}
+
+std::list<std::pair<int, int> >	PmergeMe::sortPairsList(std::list<std::pair<int, int> > &list)
+{
+	if (list.size() == 1)
+	{
+		if (list.front().first > list.front().second)
+			std::swap(list.front().first, list.front().second);
+		return (list);
+	}
+
+	std::list<std::pair<int, int> >				left;
+	std::list<std::pair<int, int> >				right;
+	std::list<std::pair<int, int> >::iterator	middle = list.begin();
+	std::advance(middle, list.size() / 2);
+
+	for (std::list<std::pair<int, int> >::iterator it = list.begin(); it != middle; it++)
+	{
+		left.push_back(std::make_pair(it->first, it->second));
+	}
+	for (std::list<std::pair<int, int> >::iterator it = middle; it != list.end(); it++)
+	{
+		right.push_back(std::make_pair(it->first, it->second));
+	}
+	left = PmergeMe::sortPairsList(left);
+	right = PmergeMe::sortPairsList(right);
+	return (PmergeMe::mergePairsList(left, right));
+}
+
+std::list<std::pair<int, int> >	PmergeMe::mergePairsList(std::list<std::pair<int, int> > &left, std::list<std::pair<int, int> > &right)
+{
+	std::list<std::pair<int, int> >	merged;
+
+	for (std::list<std::pair<int, int> >::iterator it = left.begin(); it != left.end(); it++)
+	{
+		merged.push_back(*it);
+	}
+	for (std::list<std::pair<int, int> >::iterator it = right.begin(); it != right.end(); it++)
+	{
+		merged.push_back(*it);
+	}
+	return (merged);
+}
+
+void	PmergeMe::createMainSequenceList(std::list<std::pair<int, int> > &pairs)
+{
+	PmergeMe::myList.clear();
+	PmergeMe::myList.push_back(pairs.front().second);
+	for (std::list<std::pair<int, int> >::iterator it = ++pairs.begin(); it != pairs.end(); it++)
+	{
+		int							value = it->second;
+		int							insertPos = binarySearchList(PmergeMe::myList, 0, PmergeMe::myList.size() - 1, value);
+		std::list<int>::iterator	pos = PmergeMe::myList.begin();
+
+		std::advance(pos, insertPos);
+		PmergeMe::myList.insert(pos, value);
+	}
+}
+
+int	PmergeMe::binarySearchList(std::list<int> &list, int lowerLimit, int upperLimit, int value)
+{
+	while (lowerLimit <= upperLimit)
+	{
+		int middle = lowerLimit + (upperLimit - lowerLimit) / 2;
+
+		std::list<int>::iterator	it = list.begin();
+		std::advance(it, middle);
+		if (*it == value)
+			return (middle);
+
+		if (*it < value)
+			lowerLimit = middle + 1;
+		else
+			upperLimit = middle - 1;
+	}
+	return (lowerLimit);
+}
+
+void	PmergeMe::insertPendingValuesList(std::list<std::pair<int, int> > &pairs)
+{
+	int							value;
+	int							insertPos;
+	std::list<int>::iterator	it;
+	std::list<int>::iterator	pos; 
+
+	for (std::list<std::pair<int, int> >::iterator it = pairs.begin(); it != pairs.end(); it++)
+	{
+		value = it->first;
+		insertPos = binarySearchList(PmergeMe::myList, 0, PmergeMe::myList.size() - 1, value);
+		pos = PmergeMe::myList.begin();
+		std::advance(pos, insertPos);
+		PmergeMe::myList.insert(pos, value);
+	}
+	if (PmergeMe::_oddValue.first == true)
+	{
+		value = PmergeMe::_oddValue.second;
+		insertPos = binarySearchList(PmergeMe::myList, 0, PmergeMe::myList.size() - 1, value);
+		pos = PmergeMe::myList.begin();
+		std::advance(pos, insertPos);
+		PmergeMe::myList.insert(pos, value);
+	}
 }
 
 void	PmergeMe::displayList(void)
