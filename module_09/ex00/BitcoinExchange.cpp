@@ -6,7 +6,7 @@
 /*   By: kbrousse <kbrousse@student.42angoulem      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/16 14:30:37 by kbrousse          #+#    #+#             */
-/*   Updated: 2023/06/13 12:03:11 by kbrousse         ###   ########.fr       */
+/*   Updated: 2023/06/13 13:22:41 by kbrousse         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ void	BitcoinExchange::closeFile(const std::string &name)
 
 void	BitcoinExchange::DBFormatError(unsigned int i, const std::string &line)
 {
-	std::cerr << "Error: data.csv | line " << i
+	std::cout << "Error: data.csv | line " << i
 			<< " does not respect the expected format <xxxx-xx-xx,<int, float>>. Found <"
 			<< line << "> ... Skipping it." << std::endl;
 }
 
 void	BitcoinExchange::InputFormatError(unsigned int i, const std::string &line)
 {
-	std::cerr << "Error: provided file | line " << i
+	std::cout << "Error: provided file | line " << i
 			<< " does not respect the expected format <xxxx-xx-xx,<int, float>>. Found <"
 			<< line << "> ... Skipping it." << std::endl;
 }
@@ -94,12 +94,12 @@ bool	BitcoinExchange::analyseDB(void)
 	while (std::getline(BitcoinExchange::_infile, line))
 	{
 		if (line.empty() == true)
-			std::cerr << "Error: line " << i << " is empty... Skipping it.\n";
+			std::cout << "Error: line " << i << " is empty... Skipping it.\n";
 		else if (analyseLine(line, ",") != true)
 			BitcoinExchange::DBFormatError(i, line);
 		else if (BitcoinExchange::_value < 0)
 		{
-			std::cerr << "Value for exchange rate must be positive" << std::endl;
+			std::cout << "Value for exchange rate must be positive" << std::endl;
 			BitcoinExchange::InputFormatError(i, line);
 		}
 		else
@@ -111,14 +111,14 @@ bool	BitcoinExchange::analyseDB(void)
 					(BitcoinExchange::_date, BitcoinExchange::_value));
 				if (success.second == false)
 				{
-					std::cerr << "Insertion failed, key has already been declared previously"
+					std::cout << "Insertion failed, key has already been declared previously"
 							<< std::endl;
 					return (false);
 				}
 			}
 			catch (std::exception &exception)
 			{
-				std::cerr << "Memory allocation failed" << std::endl;
+				std::cout << "Memory allocation failed" << std::endl;
 				return (false);
 			}
 		}
@@ -138,7 +138,7 @@ void	BitcoinExchange::analyseInput(void)
 	while (std::getline(BitcoinExchange::_infile, line))
 	{
 		if (line.empty() == true)
-			std::cerr << "Error: line " << i << " is empty... Skipping it.\n";
+			std::cout << "Error: line " << i << " is empty... Skipping it.\n";
 		else if (analyseLine(line, " | ") != true)
 			BitcoinExchange::InputFormatError(i, line);
 		else if (BitcoinExchange::_value > 1000 || BitcoinExchange::_value < 0)
@@ -213,7 +213,7 @@ bool	BitcoinExchange::isDateValid(const std::string &date, std::string::size_typ
 		return (false);
 	else if (yearInt <= 2009 && monthInt <= 1 && dayInt < 3)//date is prior to Bitcoin creation
 	{
-		std::cerr << "Bitcoin appeared on January 3rd 2009. So this date is invalid" << std::endl;
+		std::cout << "Bitcoin appeared on January 3rd 2009. So this date is invalid" << std::endl;
 		return (false);
 	}
 	if ((isLeapYear == false && monthInt == 2 && dayInt > 28)
